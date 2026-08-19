@@ -1,0 +1,23 @@
+type: object
+required: [episode_id, panels]
+properties:
+  episode_id: {type: string}
+  panels:
+    type: array
+    items:
+      type: object
+      required: [panel_id, dramatic_function, purpose]
+      properties:
+        panel_id: {type: string}
+        dramatic_function: {type: string}
+        shot: {type: string}
+        angle: {type: string}
+        composition: {type: string}
+        character_blocking: {type: string}
+        gaze: {type: string}
+        lighting: {type: string}
+        beat_duration: {type: string}
+        whitespace_before: {type: number}
+        whitespace_after: {type: number}
+        transition: {type: string}
+        purpose: {type: string}

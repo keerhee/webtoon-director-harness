@@ -1,0 +1,7 @@
+modes:
+  emotional:
+    priority: [emotional_beats, reaction_shots, silence, facial_expression, reveal_timing]
+  cinematic:
+    priority: [shot_progression, composition, camera_angle, depth, lighting, visual_reveal]
+  webtoon_native:
+    priority: [vertical_scroll, whitespace, long_vertical_panels, micro_panel_bursts, full_width_impact, mobile_reading_flow]

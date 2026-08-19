@@ -1,0 +1,14 @@
+threshold: 8.5
+max_revision_loops: 3
+weights:
+  narrative_clarity: 0.20
+  emotional_impact: 0.20
+  visual_composition: 0.20
+  pacing_scroll: 0.15
+  reading_flow: 0.10
+  continuity: 0.15
+hard_fail_rules:
+  - broken_scene_continuity
+  - unreadable_dialogue_order
+  - character_identity_mismatch
+  - missing_climax_or_reveal

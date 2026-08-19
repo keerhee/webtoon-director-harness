@@ -1,0 +1,9 @@
+type: object
+required: [candidate, scores, weighted_total]
+properties:
+  candidate: {type: string}
+  scores: {type: object}
+  weighted_total: {type: number}
+  hard_failures: {type: array}
+  strengths: {type: array}
+  problems: {type: array}

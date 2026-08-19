@@ -1,0 +1,9 @@
+[project]
+name = "webtoon-director-harness"
+version = "0.1.0"
+description = "Director's Room harness for webtoon/comic creative direction"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
