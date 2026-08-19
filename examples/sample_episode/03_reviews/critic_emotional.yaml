@@ -1,0 +1,48 @@
+candidate: emotional
+episode_id: sample_ep01
+loop: 0
+first_impression: "The stopped hand at P05b is the best moment in any candidate. The corridor is slack getting there."
+scores:
+  narrative_clarity:
+    score: 8
+    evidence: "P05a/P05b split makes the two facts — a card exists, the card is Jun's — land as separate events."
+  emotional_impact:
+    score: 9
+    evidence: "P05b withholds the face and gives the beat to a stopped hand; the betrayal is physical, not stated."
+  visual_composition:
+    score: 7
+    evidence: "P03 and P04 reuse the same close framing deliberately, but the rest of the sequence never establishes the room."
+  pacing_scroll:
+    score: 7
+    evidence: "Timing labels are well chosen, but panel heights are unspecified, so the holds are notional."
+  reading_flow:
+    score: 8
+    evidence: "Gaze handoff from P05a's shadow to P05b's hand is clean."
+  continuity:
+    score: 8
+    evidence: "Light direction is consistent from P04 onward; P01 to P03 does not name a source."
+weighted_total: 7.85
+hard_failures: []
+strengths:
+  - {panel_id: P05b, note: "One name and a stopped hand carry the whole turn."}
+  - {panel_id: P04, note: "Identical framing to P03 with only the light changed — the room announces itself."}
+problems:
+  - panel_id: P01
+    severity: major
+    axis: narrative_clarity
+    problem: "The scene never establishes the corridor or the room, so later close-ups have no geography to sit in."
+    revision: "Open on a wide establishing shot before tightening; borrow the cinematic candidate's P01."
+    owner: cinematography-director
+  - panel_id: P07
+    severity: major
+    axis: pacing_scroll
+    problem: "The climax is marked long_hold but no panel height is given, so the hold exists only on paper."
+    revision: "Specify panel height in screen units and the whitespace above it."
+    owner: pacing-director
+  - panel_id: P06
+    severity: minor
+    axis: emotional_impact
+    problem: "Transit panel that neither builds dread nor moves the story."
+    revision: "Compress into the top of P07 as a scroll reveal, or cut."
+    owner: emotion-director
+verdict: revise

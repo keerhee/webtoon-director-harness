@@ -1,9 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "webtoon-director-harness"
-version = "0.1.0"
+version = "0.2.0"
 description = "Director's Room harness for webtoon/comic creative direction"
+readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["PyYAML>=6.0"]
+license = { text = "MIT" }
+keywords = ["webtoon", "comics", "creative-direction", "multi-agent", "claude-code"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Artistic Software",
+]
+dependencies = [
+  "PyYAML>=6.0",
+  "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+wdh-score = "harness.cli:score"
+wdh-validate = "harness.cli:validate"
+
+[tool.setuptools]
+packages = ["harness"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,48 @@
+candidate: webtoon_native
+episode_id: sample_ep01
+loop: 0
+first_impression: "The scroll does real work — the long gap before P05a genuinely made me slow down. The panels themselves are underspecified."
+scores:
+  narrative_clarity:
+    score: 7
+    evidence: "The beats are ordered correctly, but composition and blocking are mostly absent, so the reader's understanding rests on layout alone."
+  emotional_impact:
+    score: 8
+    evidence: "The 2.0 gap before P05a converts empty screen into apprehension without drawing anything."
+  visual_composition:
+    score: 7
+    evidence: "Panel shapes are designed; what is inside them is not. No lighting or blocking is specified anywhere."
+  pacing_scroll:
+    score: 9
+    evidence: "P07's 2.6-screen panel spends the scroll the whole scene has been saving; P06's cramped sliver sets up the release."
+  reading_flow:
+    score: 8
+    evidence: "Burst-then-hold rhythm keeps the thumb moving at the intended speed; only P05b's full-width crop risks an ambiguous entry point."
+  continuity:
+    score: 7
+    evidence: "No lighting or prop state is tracked, so continuity is neither violated nor demonstrated."
+weighted_total: 7.60
+hard_failures: []
+strengths:
+  - {panel_id: P07, note: "Tall-panel disclosure makes the reader travel the dark to reach the reveal."}
+  - {panel_id: P05a, note: "Long whitespace then a small hard-cropped panel — the card feels found, not presented."}
+problems:
+  - panel_id: P01
+    severity: major
+    axis: visual_composition
+    problem: "Panels specify shape and timing but not lighting, blocking, or foreground; production cannot draw from this."
+    revision: "Merge the cinematic candidate's staging into these panel shapes."
+    owner: cinematography-director
+  - panel_id: P05b
+    severity: minor
+    axis: reading_flow
+    problem: "A full-width crop this early spends the full-width device before the climax."
+    revision: "Keep it inset, and reserve full width for P07."
+    owner: pacing-director
+  - panel_id: P04
+    severity: minor
+    axis: continuity
+    problem: "The blue source is introduced with no stated direction, so later light behaviour cannot be checked."
+    revision: "Name the source as the north alcove and keep the key consistent from here on."
+    owner: continuity-supervisor
+verdict: revise

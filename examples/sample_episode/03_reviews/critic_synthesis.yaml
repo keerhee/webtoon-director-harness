@@ -1,0 +1,43 @@
+candidate: synthesis
+episode_id: sample_ep01
+loop: 2
+first_impression: "The room is real, the turn is felt, and the scroll does work. P06 is the only panel I would still argue about."
+scores:
+  narrative_clarity:
+    score: 9
+    evidence: "P01 establishes the corridor and P05a/P05b separate the two facts, so a first-time reader can state what changed and when they learned it."
+  emotional_impact:
+    score: 9
+    evidence: "P05b gives the turn to a stopped hand and one word; the reader supplies the face."
+  visual_composition:
+    score: 9
+    evidence: "P05a collapses depth to a single piece of evidence; P07 uses converging cable runs to deliver the eye to the core."
+  pacing_scroll:
+    score: 8
+    evidence: "The P01–P03 burst earns the P04 hold, and P07 spends 2.6 screens of saved scroll. P06 remains slightly slack."
+  reading_flow:
+    score: 9
+    evidence: "One balloon in the entire scene, at P05b upper-right, clear of the hand; gaze hands off cleanly from P05a's shadow."
+  continuity:
+    score: 9
+    evidence: "Axis crossing declared at P06; blue key held north from P04; the tablet/right-hand conflict at P05b is resolved."
+weighted_total: 8.85
+hard_failures: []
+strengths:
+  - {panel_id: P05b, note: "The scene's single spoken word does all the work an explanatory paragraph would have done worse."}
+  - {panel_id: P07, note: "Tall-panel disclosure makes the reader physically travel the dark to reach the reveal."}
+  - {panel_id: P04, note: "Blue enters the top of the panel before Mina appears — the room announces itself."}
+problems:
+  - panel_id: P06
+    severity: minor
+    axis: pacing_scroll
+    problem: "The transition sliver is justified as compression, but it is still the one panel that carries no information."
+    revision: "If the episode runs long, fold P06's compression into the top of P07."
+    owner: pacing-director
+  - panel_id: P05a
+    severity: minor
+    axis: narrative_clarity
+    problem: "The whole dramatic irony rests on the card's name being legible at mobile width."
+    revision: "Flag to production as a must-preserve detail; consider a partial crop that guarantees the name is in the safe area."
+    owner: showrunner
+verdict: pass

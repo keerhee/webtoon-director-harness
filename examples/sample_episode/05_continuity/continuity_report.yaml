@@ -1,0 +1,44 @@
+episode_id: sample_ep01
+loop: 2
+violations:
+  - id: V1
+    panel_id: P05b
+    type: prop
+    severity: major
+    found: "She reaches for the card without the tablet being accounted for."
+    expected: "The tablet is in her left hand from P01."
+    fix: "Reach with the right hand and keep the tablet visible at the lower frame edge, or show her setting it down at P05a."
+    owner: cinematography-director
+    status: resolved
+    resolved_in_loop: 2
+  - id: V2
+    panel_id: P06
+    type: camera_axis
+    severity: minor
+    found: "The camera crosses to the far side of the action line."
+    expected: "Axis held south, per P01–P05b."
+    fix: "Keep the crossing, but declare it: P06 is a neutral over-shoulder, which is the legal place to cross."
+    owner: cinematography-director
+    status: accepted
+    note: "Declared in the panel direction; not a defect."
+  - id: V3
+    panel_id: P05b
+    type: lighting
+    severity: minor
+    found: "Corridor fill reaches her from behind."
+    expected: "Corridor light is cut at the threshold from P03."
+    fix: "Keep the fill only if the south door stays open; recorded as an assumption in continuity_state.yaml."
+    owner: continuity-supervisor
+    status: accepted
+
+knowledge_state_check:
+  - {panel_id: P05b, character: mina, acts_on: "recognition of Jun's card", knows_since: P05a, verdict: ok}
+  - {panel_id: P07, character: mina, acts_on: "the prototype being powered", knows_since: P07, verdict: ok}
+  - note: "The reader knows the card is Jun's from P05a; Mina from P05b. The one-panel offset is deliberate dramatic irony, not a violation."
+
+summary:
+  blocking: 0
+  major: 0
+  minor: 2
+  unresolved_major: 0
+verdict: pass

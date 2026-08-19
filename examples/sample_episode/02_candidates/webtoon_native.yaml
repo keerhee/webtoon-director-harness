@@ -1,0 +1,103 @@
+episode_id: sample_ep01
+selected_approach: webtoon_native
+# Rhythm profile: burst (P01-P03 short) -> hold (P04) -> burst (P05a-P05b)
+# -> the long scroll of P07. Total scroll ~9.4 screens.
+panels:
+  - panel_id: P01
+    dramatic_function: setup
+    shot: wide
+    angle: eye_level
+    composition: "Wide letterbox strip; Mina entering from the left edge."
+    beat_duration: instant
+    panel_height: 0.4
+    whitespace_before: 0.25
+    whitespace_after: 0.25
+    transition: action_to_action
+    purpose: "A shallow strip reads in a single thumb-flick, setting a fast baseline to break later."
+
+  - panel_id: P02
+    dramatic_function: escalate
+    shot: insert
+    angle: eye_level
+    composition: "Narrow horizontal band, latch centered."
+    beat_duration: instant
+    panel_height: 0.35
+    whitespace_before: 0.25
+    whitespace_after: 0.25
+    transition: subject_to_subject
+    purpose: "Second beat of the burst — the wrongness passes almost too fast to catch, which is the point."
+
+  - panel_id: P03
+    dramatic_function: escalate
+    shot: close
+    angle: eye_level
+    composition: "Square panel, her eyes on the upper third line."
+    beat_duration: short
+    panel_height: 0.6
+    whitespace_before: 0.25
+    whitespace_after: 1.0
+    transition: moment_to_moment
+    purpose: "Close the burst and open the first real gap — the reader's thumb slows here."
+
+  - panel_id: P04
+    dramatic_function: escalate
+    shot: medium
+    angle: eye_level
+    composition: "Tall panel; she stands in the lower quarter, blue spill entering from the top edge."
+    beat_duration: hold
+    panel_height: 1.8
+    whitespace_before: 1.5
+    whitespace_after: 1.0
+    transition: scroll_reveal
+    purpose: "A tall panel discloses top-down: the blue arrives on screen before she does, so the reader waits inside the panel."
+
+  - panel_id: P05a
+    dramatic_function: reveal
+    shot: insert
+    angle: birds_eye
+    composition: "Small square, card off-center, hard-cropped."
+    beat_duration: instant
+    panel_height: 0.5
+    whitespace_before: 2.0
+    whitespace_after: 0.25
+    transition: subject_to_subject
+    purpose: "A long empty gap, then a small hard panel — the contrast makes the card feel found rather than shown."
+
+  - panel_id: P05b
+    dramatic_function: react
+    shot: extreme_close
+    angle: eye_level
+    composition: "Stopped hand, full width, cropped at both edges."
+    dialogue:
+      - {speaker: Mina, text: "…Jun.", order: 1}
+    beat_duration: hold
+    panel_height: 0.7
+    full_width: true
+    whitespace_after: 2.5
+    transition: action_to_action
+    purpose: "Full width for the first time; the reader's eye has nowhere to escape to."
+
+  - panel_id: P06
+    dramatic_function: transition
+    shot: over_shoulder
+    angle: eye_level
+    composition: "Narrow vertical sliver, right-aligned, deliberately cramped."
+    beat_duration: short
+    panel_height: 0.9
+    whitespace_before: 0.5
+    whitespace_after: 0.5
+    transition: scroll_reveal
+    purpose: "Squeeze the frame before the release; a cramped panel makes the next one feel enormous."
+
+  - panel_id: P07
+    dramatic_function: payoff
+    shot: wide
+    angle: low
+    composition: "Very tall panel: darkness and cable runs for the first screen, the core arriving at the bottom."
+    beat_duration: long_hold
+    panel_height: 2.6
+    full_width: true
+    whitespace_before: 2.5
+    whitespace_after: 1.0
+    transition: cut
+    purpose: "Spend the scene's entire saved scroll here — the reader physically travels the dark before the reveal arrives."

@@ -6,14 +6,22 @@ tone: tense, restrained
 characters:
   - name: Mina
     traits: [analytical, cautious, exhausted]
+    note: "Signed the prototype's destruction certificate three weeks ago."
+  - name: Jun
+    traits: [absent, trusted]
+    note: "Does not appear in this scene. Present only as an access card."
 scenes:
   - scene_id: S01
     purpose: Reveal that the destroyed prototype is active.
+    source_text: >
+      Mina goes down to lab B3 for a routine seal check and finds the door unlocked,
+      the room powered, and an access card that should not be there.
     panels:
       - {panel_id: P01, source_description: "Mina approaches the locked lab door."}
       - {panel_id: P02, source_description: "The door is already unlocked."}
       - {panel_id: P03, source_description: "She enters the dark lab."}
       - {panel_id: P04, source_description: "A blue pulse appears."}
-      - {panel_id: P05, source_description: "Jun's access card lies on the floor."}
+      - {panel_id: P05, source_description: "Jun's access card lies on the floor.", source_dialogue: "Jun? Why would Jun's card be down here?"}
       - {panel_id: P06, source_description: "Mina looks deeper into the room."}
-      - {panel_id: P07, source_description: "The prototype is active."}
+      - {panel_id: P07, source_description: "The prototype is active.", source_dialogue: "It's active. It's been active this whole time."}
+layout_files: []

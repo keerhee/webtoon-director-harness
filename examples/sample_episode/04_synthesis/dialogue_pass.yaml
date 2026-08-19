@@ -1,0 +1,47 @@
+episode_id: sample_ep01
+loop: 2
+panels:
+  - panel_id: P01
+    before: "Another late night. Just the quarterly seal check."
+    after: null
+    change: cut
+    reason: "Narration duplicates what the corridor and the tablet already show."
+    balloon_count: 0
+  - panel_id: P02
+    before: "The door… it's open?"
+    after: null
+    change: cut
+    reason: "The insert shows a retracted bolt. Saying it costs the reader the discovery."
+    balloon_count: 0
+  - panel_id: P05a
+    before: "There's a card on the floor. That's Jun's access card."
+    after: null
+    change: cut
+    reason: "The reader reads the name themselves; narrating it removes the only dramatic irony in the scene."
+    balloon_count: 0
+  - panel_id: P05b
+    before: "Jun? Why would Jun's card be down here? He transferred out months ago."
+    after: "…Jun."
+    change: compress
+    reason: "The question is the reader's to ask. One name carries the recognition; the explanation belongs to the next scene."
+    balloon_count: 1
+    reading_order: [balloon_1]
+  - panel_id: P07
+    before: "It's active. It's been active this whole time."
+    after: null
+    change: cut
+    reason: "The image is unambiguous. A line here would tell the reader how to feel about what they can see."
+    balloon_count: 0
+
+silent_panels: [P01, P02, P03, P04, P05a, P06, P07]
+
+sfx:
+  - {panel_id: P04, sfx: "hum", intensity: low, reason: "Sound arrives before its source is seen — the cheapest tension in the scene."}
+
+removed_narration:
+  - {panel_id: P01, text: "Another late night.", reason: "Duplicates visible action."}
+  - {panel_id: P07, text: "It's been active this whole time.", reason: "Explains an image that already says it."}
+
+notes:
+  - "The scene now carries exactly one spoken word. Verify at art stage that P05a's card name is legible at mobile width — it is now the only place the reader learns who was here."
+  - "P05b balloon sits upper-right, clear of the hand; single balloon, no ordering ambiguity."

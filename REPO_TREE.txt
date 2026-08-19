@@ -1,5 +1,4 @@
 [D] .claude
-  [F] CLAUDE.md
   [D] agents
     [F] cinematography-director.md
     [F] continuity-supervisor.md
@@ -18,20 +17,21 @@
       [F] SKILL.md
     [D] quality-loop
       [F] SKILL.md
-[F] .gitignore
-[F] CONTRIBUTING.md
-[F] NOTICE.md
-[F] README.md
-[D] _workspace
-  [F] .gitkeep
+  [F] CLAUDE.md
+[D] .github
+  [D] workflows
+    [F] ci.yml
 [D] adapters
   [D] aitoon
     [F] README.md
 [D] config
   [F] direction_modes.yaml
+  [F] direction_vocabulary.yaml
   [F] quality_gate.yaml
 [D] docs
+  [F] AGENTS.md
   [F] ARCHITECTURE.md
+  [F] DIRECTION_LANGUAGE.md
   [F] SCORING.md
   [F] WORKFLOW.md
 [D] examples
@@ -39,17 +39,64 @@
     [D] 00_input
       [F] normalized_input.yaml
       [F] source_handoff.md
-[F] pyproject.toml
+    [D] 01_analysis
+      [F] narrative_analysis.yaml
+    [D] 02_candidates
+      [F] cinematic.yaml
+      [F] emotional.yaml
+      [F] webtoon_native.yaml
+    [D] 03_reviews
+      [F] critic_cinematic.yaml
+      [F] critic_emotional.yaml
+      [F] critic_synthesis.yaml
+      [F] critic_webtoon_native.yaml
+      [F] quality_gate_result.yaml
+    [D] 04_synthesis
+      [F] decision_log.md
+      [F] dialogue_pass.yaml
+      [F] selected_direction.yaml
+    [D] 05_continuity
+      [F] continuity_report.yaml
+      [F] continuity_state.yaml
+    [D] 06_handoff
+      [F] continuity_state.yaml
+      [F] critic_report.md
+      [F] direction_bible.md
+      [F] panel_direction.yaml
+      [F] stage2_handoff.md
+[D] harness
+  [F] __init__.py
+  [F] artifacts.py
+  [F] cli.py
+  [F] config.py
+  [F] scoring.py
 [D] schemas
+  [F] continuity_state.schema.yaml
   [F] critic_report.schema.yaml
+  [F] narrative_analysis.schema.yaml
   [F] panel_direction.schema.yaml
 [D] scripts
   [F] init_episode.py
   [F] score_direction.py
+  [F] validate_artifacts.py
   [F] validate_handoff.py
 [D] templates
   [F] critic_report.md
   [F] direction_bible.md
   [F] stage2_handoff.md
 [D] tests
+  [F] conftest.py
+  [F] test_example_episode.py
+  [F] test_prompts.py
+  [F] test_schemas.py
+  [F] test_scoring.py
   [F] test_structure.py
+[F] .gitattributes
+[F] .gitignore
+[F] CONTRIBUTING.md
+[F] LICENSE
+[F] NOTICE.md
+[F] pyproject.toml
+[F] README.md
+[F] REPO_TREE.txt
+[D] _workspace          (gitignored; episode work lives here)

@@ -1,0 +1,60 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Narrative Analysis
+description: The standard every downstream candidate is measured against.
+type: object
+required: [episode_id, scene_goal, reader_emotion_arc, reveal_order, climax_panel]
+additionalProperties: true
+properties:
+  episode_id: {type: string}
+  scene_goal:
+    type: string
+    minLength: 10
+    description: "One sentence: what must change by the end of the scene."
+  reader_emotion_arc:
+    type: array
+    minItems: 2
+    items: {type: string}
+  knowledge_state:
+    type: object
+    properties:
+      reader_knows: {type: array, items: {type: string}}
+      reader_suspects: {type: array, items: {type: string}}
+      characters_know:
+        type: object
+        additionalProperties: {type: array, items: {type: string}}
+  reveal_order:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [panel_id, reveals]
+      properties:
+        panel_id: {type: string}
+        reveals: {type: string}
+        to: {type: string, description: "reader | a character name | both"}
+  dramatic_beats:
+    type: array
+    items:
+      type: object
+      required: [beat, panels]
+      properties:
+        beat: {type: string, enum: [setup, escalation, turn, climax, payoff, aftermath]}
+        panels: {type: array, items: {type: string}}
+        function: {type: string}
+  climax_panel:
+    type: string
+    pattern: "^P[0-9]{2,3}[a-z]?$"
+    description: "A single panel ID, never a range."
+  hook: {type: string}
+  removable_panels:
+    type: array
+    items:
+      type: object
+      required: [panel_id, reason]
+      properties:
+        panel_id: {type: string}
+        reason: {type: string}
+  risks:
+    type: array
+    items: {type: string}
+    description: "Specific failure modes, not generic caution."

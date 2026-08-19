@@ -1,0 +1,122 @@
+episode_id: sample_ep01
+selected_approach: cinematic
+# Shot progression curve: wide -> steadily tighter through the corridor, one release
+# to wide at the reveal. The camera closes in on Mina and then abandons her for the object.
+panels:
+  - panel_id: P01
+    dramatic_function: setup
+    shot: extreme_wide
+    angle: high
+    composition: "Corridor in one-point perspective; Mina a small figure at the vanishing point."
+    character_blocking: "Walking away from camera toward the far door."
+    gaze: "Leading lines of the ceiling strip carry the eye to the door."
+    foreground: "Out-of-focus handrail, lower third."
+    background: "Door B3, the only closed thing in a corridor of open ones."
+    lighting: "Overhead strips, flat and institutional; no modelling."
+    beat_duration: short
+    transition: cut
+    purpose: "Establish geography and scale so every later close-up has a room to belong to."
+
+  - panel_id: P02
+    dramatic_function: escalate
+    shot: insert
+    angle: eye_level
+    composition: "Latch plate dead center; frame deliberately symmetrical."
+    character_blocking: "Her hand entering from frame right, not yet touching."
+    gaze: "Center-weighted — the reader has nowhere else to look."
+    foreground: "Door surface, sharp."
+    background: "A hairline of warm light through the gap."
+    lighting: "Corridor key from behind camera; the light in the gap is motivated by the room."
+    beat_duration: medium
+    transition: match_cut
+    purpose: "Symmetry makes the retracted bolt read instantly as wrong."
+
+  - panel_id: P03
+    dramatic_function: escalate
+    shot: wide
+    angle: low
+    composition: "Doorway as a frame within the frame; Mina silhouetted in it, room black beyond."
+    character_blocking: "One step across the threshold, weight still on the back foot."
+    gaze: "Her silhouette points into the dark; reader exits the panel downward into it."
+    foreground: "Door edge, near-black, framing the left third."
+    background: "Undifferentiated dark — the room withholds itself."
+    lighting: "Backlit from the corridor; she is a shape, not a person."
+    beat_duration: medium
+    transition: cut
+    purpose: "Frame-within-frame turns entering into crossing a boundary."
+
+  - panel_id: P04
+    dramatic_function: escalate
+    shot: medium
+    angle: eye_level
+    composition: "Mina left of frame; the right two-thirds empty and dark, waiting."
+    character_blocking: "Turned toward the unseen source; shoulders squared."
+    gaze: "Negative space in front of her holds the anticipation."
+    foreground: "Bench edge crossing the bottom of frame."
+    background: "The blue source stays off-panel; only its spill is visible."
+    lighting: "Blue key from north, raking; corridor warmth cut at the threshold."
+    sfx: "hum (low)"
+    beat_duration: medium
+    transition: action_to_action
+    purpose: "Withhold the source while proving it exists — obstruction, not darkness, creates the wait."
+
+  - panel_id: P05a
+    dramatic_function: reveal
+    shot: insert
+    angle: birds_eye
+    composition: "Card isolated on the floor grid; her shadow entering from the top edge."
+    character_blocking: "Mina present only as shadow."
+    gaze: "Shadow is the leading line; it terminates on the card."
+    foreground: "Floor, sharp at the card, falling off at the edges."
+    background: "None — depth deliberately collapsed."
+    lighting: "Blue pulse skimming the card face, catching the photo."
+    beat_duration: hold
+    whitespace_before: 1.0
+    transition: subject_to_subject
+    purpose: "Bird's-eye flattens the room to a single piece of evidence."
+
+  - panel_id: P05b
+    dramatic_function: react
+    shot: close
+    angle: low
+    composition: "Her face top-right, most of the frame given to the space below her."
+    character_blocking: "Crouching; head turned down and away from the alcove."
+    gaze: "Down at the card, which the reader can no longer see."
+    foreground: "Out-of-focus card edge, bottom of frame."
+    background: "The alcove glow, soft, behind her head."
+    lighting: "Blue from below; a second, dimmer fill from the corridor behind."
+    dialogue:
+      - {speaker: Mina, text: "…Jun.", order: 1}
+    beat_duration: hold
+    transition: action_to_action
+    purpose: "Low angle keeps the alcove in frame behind her — the next threat stays present while she is distracted."
+
+  - panel_id: P06
+    dramatic_function: transition
+    shot: over_shoulder
+    angle: eye_level
+    composition: "Her shoulder occupies the left third; the alcove mouth sits on the right third line."
+    character_blocking: "Rising, head turning toward the back of the room."
+    gaze: "Over-shoulder framing hands the reader her eyeline without giving up her face."
+    foreground: "Shoulder and jaw, dark and soft."
+    background: "Alcove, still partially obstructed by a cable rack."
+    lighting: "Blue growing; contrast climbing toward the reveal."
+    beat_duration: short
+    transition: scroll_reveal
+    purpose: "Move the camera to her side of the axis so the reveal arrives on her eyeline."
+
+  - panel_id: P07
+    dramatic_function: payoff
+    shot: wide
+    angle: low
+    composition: "Prototype on the upper third line, alcove framing it; Mina a silhouette at the lower edge."
+    character_blocking: "Standing, arrested mid-step, dwarfed."
+    gaze: "Cable runs converge on the core; the eye is delivered there and held."
+    foreground: "Cable rack, out of focus, framing without obstructing."
+    background: "The alcove's far wall, visible only where the pulse reaches it."
+    lighting: "Single source, high contrast, everything else silhouette."
+    full_width: true
+    beat_duration: long_hold
+    whitespace_before: 1.5
+    transition: cut
+    purpose: "Release the tightening progression into scale, with the object finally taking the frame from her."

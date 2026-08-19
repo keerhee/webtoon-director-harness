@@ -1,0 +1,107 @@
+episode_id: sample_ep01
+selected_approach: emotional
+panels:
+  - panel_id: P01
+    dramatic_function: setup
+    shot: medium_close
+    angle: eye_level
+    composition: "Mina three-quarters right, door edge cutting the left of frame."
+    gaze: "Down at the tablet, not at the door — she is not expecting anything."
+    lighting: "Corridor strip light, flat and cold."
+    beat_duration: short
+    transition: action_to_action
+    silent: true
+    purpose: "Establish an unremarkable evening so the first wrongness has something to break."
+
+  - panel_id: P02
+    dramatic_function: escalate
+    shot: extreme_close
+    angle: high
+    composition: "Handle and latch fill the frame; the bolt is retracted."
+    gaze: "Reader sees the retracted bolt before Mina's hand reaches it."
+    lighting: "Same cold strip; a warmer spill leaks from the gap."
+    beat_duration: hold
+    whitespace_before: 1.5
+    transition: subject_to_subject
+    silent: true
+    purpose: "Give the reader one beat of knowing more than Mina — the scene's only free suspense."
+
+  - panel_id: P03
+    dramatic_function: escalate
+    shot: close
+    angle: eye_level
+    composition: "Her face at the frame edge, two-thirds of the panel dark."
+    gaze: "Into the dark; pupils wide, one blink held a beat too long."
+    lighting: "Corridor light dying across her cheek."
+    beat_duration: hold
+    whitespace_after: 1.5
+    transition: moment_to_moment
+    silent: true
+    purpose: "Characterize the darkness through her face instead of drawing the darkness."
+
+  - panel_id: P04
+    dramatic_function: escalate
+    shot: close
+    angle: eye_level
+    composition: "Her face again, unchanged framing — but now lit blue from off-panel."
+    gaze: "Eyes flick right, toward a source the reader cannot see."
+    lighting: "Blue key from off-panel north; corridor warmth gone."
+    sfx: "hum (low)"
+    beat_duration: medium
+    transition: moment_to_moment
+    silent: true
+    purpose: "Repeat the framing so the only change is the light — the room announces itself before it is shown."
+
+  - panel_id: P05a
+    dramatic_function: reveal
+    shot: insert
+    angle: high
+    composition: "Access card bottom-right, floor grain filling the rest."
+    gaze: "Reader enters top-left along her shadow and stops on the card."
+    lighting: "Blue pulse rakes across the card face; the name is legible, she has not looked yet."
+    beat_duration: hold
+    whitespace_before: 1.5
+    whitespace_after: 2.0
+    transition: subject_to_subject
+    silent: true
+    purpose: "Let the reader read the name one beat before Mina does."
+
+  - panel_id: P05b
+    dramatic_function: react
+    shot: extreme_close
+    angle: eye_level
+    composition: "Her hand stopped halfway down, fingers open, not yet closing."
+    gaze: "Off-frame, fixed on the card."
+    lighting: "Blue from below, lifting the underside of her fingers."
+    dialogue:
+      - {speaker: Mina, text: "…Jun.", order: 1}
+    beat_duration: long_hold
+    whitespace_after: 2.0
+    transition: action_to_action
+    purpose: "Betrayal lands in a stopped hand and one name, not in an explanation."
+
+  - panel_id: P06
+    dramatic_function: transition
+    shot: medium_full
+    angle: low
+    composition: "Her back, rising into the upper third; the alcove glow past her shoulder."
+    gaze: "Reader is behind her, forced to look where she looks."
+    lighting: "Blue rim on her jacket; face unreadable."
+    beat_duration: short
+    transition: scroll_reveal
+    silent: true
+    purpose: "Hand the reader her point of view before the last panel takes it away."
+
+  - panel_id: P07
+    dramatic_function: payoff
+    shot: wide
+    angle: eye_level
+    composition: "Prototype centered in the alcove, Mina small at the lower frame edge."
+    gaze: "Enters on her silhouette, travels the cable run, arrives at the pulse."
+    lighting: "The prototype is the only source; everything else is its shadow."
+    full_width: true
+    beat_duration: long_hold
+    whitespace_before: 2.0
+    transition: cut
+    silent: true
+    purpose: "The scene's held breath releases into scale — the thing she certified dead is the room's only light."

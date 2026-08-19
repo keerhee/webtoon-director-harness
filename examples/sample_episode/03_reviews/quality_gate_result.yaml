@@ -1,0 +1,24 @@
+episode_id: sample_ep01
+loop: 2
+candidate: synthesis
+weighted_total: 8.85
+threshold: 8.5
+hard_failures: []
+verdict: PASS
+delta_from_previous: 0.65
+
+loop_history:
+  - {loop: 0, candidate: emotional, weighted_total: 7.85, verdict: REVISE}
+  - {loop: 0, candidate: cinematic, weighted_total: 8.20, verdict: REVISE}
+  - {loop: 0, candidate: webtoon_native, weighted_total: 7.60, verdict: REVISE}
+  - {loop: 1, candidate: synthesis, weighted_total: 8.20, verdict: REVISE, note: "Panel heights still unspecified; P05b showed the face."}
+  - {loop: 2, candidate: synthesis, weighted_total: 8.85, verdict: PASS}
+
+unresolved:
+  - {panel_id: P06, axis: pacing_scroll, severity: minor, note: "Carries compression but no information; fold into P07 if the episode runs long."}
+  - {panel_id: P05a, axis: narrative_clarity, severity: minor, note: "Dramatic irony depends on the card name being legible at mobile width."}
+
+continuity:
+  blocking: 0
+  major: 0
+  minor: 2

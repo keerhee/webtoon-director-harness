@@ -1,0 +1,44 @@
+episode_id: sample_ep01
+loop: 2
+entities:
+  characters:
+    - id: mina
+      costume: "Field jacket over lab shirt, ID lanyard tucked in, hair tied back."
+      handedness: right
+      held_objects: [tablet]
+      injuries: []
+      knowledge:
+        - "The prototype was certified destroyed (she signed it)."
+        - "From P02: the lab door is unlocked."
+        - "From P05b: Jun's access card is on the lab floor."
+        - "From P07: the prototype is powered."
+  props:
+    - {id: tablet, location: "Mina's left hand", since: P01}
+    - {id: access_card_jun, location: "lab floor, two metres inside the door", since: P05a}
+    - {id: prototype_core, location: "north alcove", since: P07}
+  location:
+    id: lab_b3
+    geography: "Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall."
+    lighting:
+      key: "Blue pulse from the north alcove, from P04 onward."
+      ambient: "Corridor strip light through the open south door, cut at the threshold."
+
+timeline:
+  start: "22:40"
+  elapsed_by_last_panel: "~70 seconds"
+
+camera_axis: "South of the action line through P05b; crossed deliberately at P06, which is a neutral over-shoulder."
+
+panel_states:
+  - {panel_id: P01, characters_present: [mina], held: [tablet], light: "Corridor strips, flat white.", notes: "Door B3 closed."}
+  - {panel_id: P02, characters_present: [mina], held: [tablet], light: "Corridor key; warm hairline from the gap.", notes: "Bolt retracted; door not yet opened."}
+  - {panel_id: P03, characters_present: [mina], held: [tablet], light: "Corridor backlight on her cheek.", notes: "One step across the threshold. Blue not yet visible."}
+  - {panel_id: P04, characters_present: [mina], held: [tablet], light: "Blue key from north alcove.", notes: "First appearance of the blue source. Hum begins."}
+  - {panel_id: P05a, characters_present: [], held: [], light: "Blue raking across the floor.", notes: "Mina present only as shadow entering from the top edge — consistent with her standing south of the card."}
+  - {panel_id: P05b, characters_present: [mina], held: [tablet], light: "Blue from below plus dim corridor fill.", notes: "Crouching. Tablet still in her left hand — reaching hand is her right."}
+  - {panel_id: P06, characters_present: [mina], held: [tablet], light: "Blue rising, contrast climbing.", notes: "Rising; camera crosses the axis on this neutral panel."}
+  - {panel_id: P07, characters_present: [mina], held: [tablet], light: "Prototype is the only source.", notes: "Standing at the lower frame edge; alcove framing the core."}
+
+assumptions:
+  - "The corridor door remains open behind Mina from P03 onward; the corridor fill in P05b depends on it."
+  - "Jun's transfer date is not established in this episode; the card's presence is treated as unexplained, not contradictory."

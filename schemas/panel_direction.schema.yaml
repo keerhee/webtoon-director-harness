@@ -1,23 +1,69 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Panel Direction
+description: Production-ready panel-level direction. One file per episode.
 type: object
 required: [episode_id, panels]
+additionalProperties: true
 properties:
   episode_id: {type: string}
+  loop: {type: integer, minimum: 0}
+  selected_approach:
+    type: string
+    enum: [emotional, cinematic, webtoon_native, synthesis]
   panels:
     type: array
+    minItems: 1
     items:
       type: object
       required: [panel_id, dramatic_function, purpose]
+      additionalProperties: true
       properties:
-        panel_id: {type: string}
-        dramatic_function: {type: string}
-        shot: {type: string}
-        angle: {type: string}
+        panel_id:
+          type: string
+          pattern: "^P[0-9]{2,3}[a-z]?$"
+        dramatic_function:
+          type: string
+          enum: [setup, escalate, reveal, react, transition, payoff]
+        shot:
+          type: string
+          enum: [extreme_wide, wide, full, medium_full, medium, medium_close,
+                 close, extreme_close, insert, over_shoulder, pov, two_shot]
+        angle:
+          type: string
+          enum: [eye_level, high, low, birds_eye, worms_eye, dutch, profile, back]
         composition: {type: string}
         character_blocking: {type: string}
         gaze: {type: string}
+        foreground: {type: string}
+        background: {type: string}
         lighting: {type: string}
-        beat_duration: {type: string}
-        whitespace_before: {type: number}
-        whitespace_after: {type: number}
-        transition: {type: string}
-        purpose: {type: string}
+        dialogue_space: {type: string}
+        dialogue:
+          type: array
+          items:
+            type: object
+            required: [speaker, text]
+            properties:
+              speaker: {type: string}
+              text: {type: string}
+              order: {type: integer, minimum: 1}
+        silent: {type: boolean}
+        sfx: {type: string}
+        beat_duration:
+          type: string
+          enum: [instant, short, medium, hold, long_hold]
+        panel_height: {type: number, minimum: 0.2, maximum: 3.0}
+        full_width: {type: boolean}
+        whitespace_before: {type: number, minimum: 0}
+        whitespace_after: {type: number, minimum: 0}
+        transition:
+          type: string
+          enum: [cut, match_cut, scroll_reveal, time_skip, scene_change,
+                 moment_to_moment, action_to_action, subject_to_subject, aspect_to_aspect]
+        purpose:
+          type: string
+          minLength: 8
+          description: "The story, emotion, rhythm, or readability reason. Never decorative."
+        grafted_from:
+          type: string
+          enum: [emotional, cinematic, webtoon_native]

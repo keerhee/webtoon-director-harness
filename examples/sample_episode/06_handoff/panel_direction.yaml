@@ -1,0 +1,168 @@
+episode_id: sample_ep01
+selected_approach: synthesis
+loop: 2
+# Spine: cinematic (geography and staging).
+# Grafts: emotional (the P03 face, the P05a/P05b split, the stopped hand),
+#         webtoon_native (panel heights, whitespace, P07 tall-panel disclosure).
+panels:
+  - panel_id: P01
+    dramatic_function: setup
+    shot: extreme_wide
+    angle: high
+    composition: "Corridor in one-point perspective; Mina small at the vanishing point, door B3 closed at the end."
+    character_blocking: "Walking away from camera, tablet in her left hand."
+    gaze: "Ceiling strips act as leading lines toward the door."
+    foreground: "Out-of-focus handrail across the lower third."
+    background: "B3 — the only closed door in a corridor of open ones."
+    lighting: "Overhead strips, flat and institutional; no modelling."
+    dialogue_space: "None."
+    silent: true
+    beat_duration: instant
+    panel_height: 0.5
+    whitespace_before: 0.25
+    whitespace_after: 0.25
+    transition: action_to_action
+    purpose: "Establish geography and routine so every later close-up has a room to belong to."
+    grafted_from: cinematic
+
+  - panel_id: P02
+    dramatic_function: escalate
+    shot: insert
+    angle: eye_level
+    composition: "Latch plate dead center, frame symmetrical; the bolt is retracted."
+    character_blocking: "Her hand entering from frame right, not yet touching."
+    gaze: "Center-weighted — the reader sees the retracted bolt before her hand arrives."
+    foreground: "Door surface, sharp."
+    background: "A hairline of warm light through the gap."
+    lighting: "Corridor key from behind camera; the gap light is motivated by the room."
+    dialogue_space: "None."
+    silent: true
+    beat_duration: instant
+    panel_height: 0.35
+    whitespace_before: 0.25
+    whitespace_after: 0.25
+    transition: subject_to_subject
+    purpose: "Symmetry makes the wrongness instant, and the reader holds it one beat longer than Mina."
+    grafted_from: cinematic
+
+  - panel_id: P03
+    dramatic_function: escalate
+    shot: close
+    angle: eye_level
+    composition: "Her face at the left frame edge; two-thirds of the panel is the dark she is looking into."
+    character_blocking: "One step across the threshold, weight still on the back foot."
+    gaze: "Into the dark; pupils wide, one blink held a beat too long."
+    foreground: "Door edge, near-black, framing the left."
+    background: "Undifferentiated dark — the room withholds itself."
+    lighting: "Corridor backlight dying across her cheek."
+    dialogue_space: "None."
+    silent: true
+    beat_duration: short
+    panel_height: 0.6
+    whitespace_before: 0.25
+    whitespace_after: 1.0
+    transition: moment_to_moment
+    purpose: "Characterize the darkness through her face rather than drawing the darkness."
+    grafted_from: emotional
+
+  - panel_id: P04
+    dramatic_function: escalate
+    shot: medium
+    angle: eye_level
+    composition: "Tall panel; Mina in the lower quarter, the right two-thirds empty. Blue spill enters from the top edge."
+    character_blocking: "Turned toward the unseen source, shoulders squared."
+    gaze: "Negative space in front of her holds the anticipation; the eye travels down into her."
+    foreground: "Bench edge crossing the bottom of frame."
+    background: "The source stays off-panel; only its spill is visible."
+    lighting: "Blue key from the north alcove, raking; corridor warmth cut at the threshold."
+    dialogue_space: "None."
+    sfx: "hum (low)"
+    silent: true
+    beat_duration: hold
+    panel_height: 1.8
+    whitespace_before: 1.5
+    whitespace_after: 1.0
+    transition: scroll_reveal
+    purpose: "Tall-panel disclosure: the blue arrives on screen before she does, so the reader waits inside the panel."
+    grafted_from: webtoon_native
+
+  - panel_id: P05a
+    dramatic_function: reveal
+    shot: insert
+    angle: birds_eye
+    composition: "Card isolated on the floor grid, off-center; her shadow enters from the top edge."
+    character_blocking: "Mina present only as a shadow."
+    gaze: "The shadow is the leading line and terminates on the card."
+    foreground: "Floor, sharp at the card, falling off at the edges."
+    background: "None — depth deliberately collapsed."
+    lighting: "Blue pulse skimming the card face; the name is legible to the reader."
+    dialogue_space: "None. Silent panel."
+    silent: true
+    beat_duration: hold
+    panel_height: 0.5
+    whitespace_before: 2.0
+    whitespace_after: 0.25
+    transition: subject_to_subject
+    purpose: "A long gap then a small hard panel: the card feels found, and the reader reads the name one beat before Mina."
+    grafted_from: emotional
+
+  - panel_id: P05b
+    dramatic_function: react
+    shot: extreme_close
+    angle: low
+    composition: "Her hand stopped halfway down, fingers open; the alcove glow stays visible past her wrist."
+    character_blocking: "Crouching; head turned down and away from the alcove."
+    gaze: "Off-frame, fixed on the card the reader can no longer see."
+    foreground: "Out-of-focus card edge at the bottom of frame."
+    background: "Alcove glow, soft, behind her."
+    lighting: "Blue from below, lifting the underside of her fingers; dim corridor fill behind."
+    dialogue_space: "Upper-right, clear of the hand."
+    dialogue:
+      - {speaker: Mina, text: "…Jun.", order: 1}
+    beat_duration: long_hold
+    panel_height: 0.7
+    whitespace_after: 2.5
+    transition: action_to_action
+    purpose: "Betrayal lands in a stopped hand and one name, while the low angle keeps the next threat in frame."
+    grafted_from: emotional
+
+  - panel_id: P06
+    dramatic_function: transition
+    shot: over_shoulder
+    angle: eye_level
+    composition: "Narrow vertical sliver, right-aligned and cramped; her shoulder fills the left, the alcove mouth sits on the right third."
+    character_blocking: "Rising, head turning toward the back of the room."
+    gaze: "Over-shoulder framing hands the reader her eyeline without giving up her face."
+    foreground: "Shoulder and jaw, dark and soft."
+    background: "Alcove, still partly obstructed by a cable rack."
+    lighting: "Blue growing; contrast climbing toward the reveal."
+    dialogue_space: "None."
+    silent: true
+    beat_duration: short
+    panel_height: 0.9
+    whitespace_before: 0.5
+    whitespace_after: 0.5
+    transition: scroll_reveal
+    purpose: "Cross to her side of the axis and squeeze the frame, so the next panel feels enormous."
+    grafted_from: cinematic
+
+  - panel_id: P07
+    dramatic_function: payoff
+    shot: wide
+    angle: low
+    composition: "Very tall panel: darkness and converging cable runs for the first screen; the prototype arrives at the bottom, Mina a silhouette at the lower edge."
+    character_blocking: "Standing, arrested mid-step, dwarfed by the alcove."
+    gaze: "Cable runs converge on the core; the eye is delivered there and held."
+    foreground: "Cable rack, out of focus, framing without obstructing."
+    background: "The alcove's far wall, visible only where the pulse reaches it."
+    lighting: "The prototype is the only source; everything else is its shadow."
+    dialogue_space: "None. Silent panel."
+    silent: true
+    full_width: true
+    beat_duration: long_hold
+    panel_height: 2.6
+    whitespace_before: 2.5
+    whitespace_after: 1.0
+    transition: cut
+    purpose: "Spend the scene's saved scroll here: the reader travels the dark, and the object she certified destroyed takes the frame from her."
+    grafted_from: webtoon_native

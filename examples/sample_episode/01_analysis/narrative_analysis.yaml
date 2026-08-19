@@ -1,0 +1,39 @@
+episode_id: sample_ep01
+scene_goal: "Mina learns that the prototype she certified as destroyed is running, and that someone she trusts was here first."
+reader_emotion_arc: [routine, unease, dread, recognition, shock]
+
+knowledge_state:
+  reader_knows:
+    - "The prototype was officially destroyed."
+    - "Mina signed the destruction certificate."
+  reader_suspects:
+    - "The lab is not empty."
+  characters_know:
+    Mina:
+      - "The lab should be locked and dark."
+    Jun:
+      - "Everything the reader does not yet know."
+
+reveal_order:
+  - {panel_id: P02, reveals: "The door is already unlocked.", to: both}
+  - {panel_id: P04, reveals: "Something in the room has power.", to: both}
+  - {panel_id: P05a, reveals: "An access card is on the floor.", to: reader}
+  - {panel_id: P05b, reveals: "The card is Jun's.", to: both}
+  - {panel_id: P07, reveals: "The prototype is active.", to: both}
+
+dramatic_beats:
+  - {beat: setup, panels: [P01], function: "Establish the locked, routine world."}
+  - {beat: escalation, panels: [P02, P03], function: "The routine is already broken; she goes in anyway."}
+  - {beat: turn, panels: [P04, P05a, P05b], function: "Impersonal wrongness becomes personal betrayal."}
+  - {beat: climax, panels: [P07], function: "The certified-destroyed object is alive."}
+
+climax_panel: P07
+hook: "If Jun was here, was the destruction ever real — and is he still in the building?"
+
+removable_panels:
+  - {panel_id: P06, reason: "Pure transit. Merge into P07 as a scroll reveal unless the pause is earning dread."}
+
+risks:
+  - "The card reveal and the prototype reveal land in the same breath, so neither gets a beat."
+  - "P03 (entering a dark room) is a genre cliche unless the darkness is characterized."
+  - "If the reader learns the card is Jun's at the same instant Mina does, the scene loses its only moment of dramatic irony."

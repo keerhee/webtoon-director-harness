@@ -1,0 +1,71 @@
+# Controlled vocabulary for panel direction.
+# Free-text terms break scoring, diffing, and downstream production — use these,
+# and extend this file deliberately rather than inventing terms in an artifact.
+
+shot:
+  extreme_wide:  "Environment dominates; figures are small. Establishes place or isolation."
+  wide:          "Full figure with substantial context. Geography and blocking readable."
+  full:          "Head to feet, minimal context. Body language is the subject."
+  medium_full:   "Knees up. Action plus some expression."
+  medium:        "Waist up. The default conversational shot — cheap to overuse."
+  medium_close:  "Chest up. Expression leads, context survives."
+  close:         "Head and shoulders. Emotion is the subject."
+  extreme_close: "A feature or detail. Intensity, or deliberate withholding of context."
+  insert:        "An object, isolated. Evidence, or a beat carried by a thing."
+  over_shoulder: "Framed past a foreground figure. Relationship and asymmetry of knowledge."
+  pov:           "The camera is a character's eyes. Use sparingly; it costs the reader that face."
+  two_shot:      "Two figures in one frame. The space between them is the content."
+
+angle:
+  eye_level: "Neutral. The absence of comment."
+  high:      "Looking down. Diminishment, vulnerability, or overview."
+  low:       "Looking up. Power, threat, or awe."
+  birds_eye: "Directly above. Geography, fate, detachment."
+  worms_eye: "Directly below. Overwhelming scale."
+  dutch:     "Tilted horizon. Instability. Loses meaning if repeated."
+  profile:   "Side-on. Formal distance; two profiles read as opposition."
+  back:      "From behind. The reader shares the character's forward attention."
+
+composition_devices:
+  - rule_of_thirds
+  - centered_symmetry
+  - negative_space_front   # anticipation
+  - negative_space_behind  # vulnerability, the unseen
+  - frame_within_frame
+  - leading_lines
+  - obstruction
+  - reflection
+  - silhouette
+  - diagonal_dynamism
+
+transition:
+  cut:                "Plain change of framing within continuous time."
+  match_cut:          "Shape or motion carries across the boundary."
+  scroll_reveal:      "The next panel discloses itself as the reader scrolls."
+  time_skip:          "Explicit elapsed time. Must be declared or it reads as an error."
+  scene_change:       "New place or time; requires re-establishment."
+  moment_to_moment:   "Minimal change. Slows time; costs panels."
+  action_to_action:   "Same subject, next stage of an action."
+  subject_to_subject: "Different subject, same scene. The reader supplies the connection."
+  aspect_to_aspect:   "Different aspects of one place or mood. Builds atmosphere, not plot."
+
+beat_duration:
+  instant:   {whitespace_multiplier: 0.25, use: "Impact, interruption, a burst of small panels."}
+  short:     {whitespace_multiplier: 0.5,  use: "Functional continuity between beats."}
+  medium:    {whitespace_multiplier: 1.0,  use: "Default. Ordinary story time."}
+  hold:      {whitespace_multiplier: 1.5,  use: "The reader is made to wait — reactions, dread."}
+  long_hold: {whitespace_multiplier: 2.5,  use: "Climax, aftermath, or the silence before a reveal."}
+
+dramatic_function:
+  - setup
+  - escalate
+  - reveal
+  - react
+  - transition
+  - payoff
+
+# Panel height is expressed in phone-screen heights (1.0 = one viewport).
+panel_height:
+  min: 0.2
+  max: 3.0
+  note: "Above ~2.0 the panel is read in passes; design the top and bottom as separate moments."

@@ -1,5 +1,8 @@
+# Quality gate. Weights must sum to 1.0 (enforced by tests and by score_direction.py).
 threshold: 8.5
 max_revision_loops: 3
+min_improvement_per_loop: 0.2   # below this, the problem is upstream — revisit the analysis
+
 weights:
   narrative_clarity: 0.20
   emotional_impact: 0.20
@@ -7,8 +10,28 @@ weights:
   pacing_scroll: 0.15
   reading_flow: 0.10
   continuity: 0.15
+
+# Any of these forces REVISE regardless of the weighted total.
 hard_fail_rules:
-  - broken_scene_continuity
-  - unreadable_dialogue_order
-  - character_identity_mismatch
-  - missing_climax_or_reveal
+  broken_scene_continuity:
+    description: "A blocking continuity violation: the reader cannot form a coherent picture."
+    detected_by: continuity-supervisor
+  unreadable_dialogue_order:
+    description: "Balloon order conflicts with the natural scan path, or a panel carries 3+ balloons in ambiguous order."
+    detected_by: dialogue-silence-editor
+  character_identity_mismatch:
+    description: "A character is not unambiguously recognizable across panels."
+    detected_by: continuity-supervisor
+  missing_climax_or_reveal:
+    description: "No panel carries the scene, or the reveal named in the narrative analysis never lands."
+    detected_by: direction-critic
+
+# Scoring integrity rules enforced during review.
+evidence_required_at_or_above: 9   # scores of 9-10 must cite a panel ID
+score_range: [0, 10]
+
+# Severity of continuity violations, and how each maps to the gate.
+severity_policy:
+  blocking: hard_fail
+  major: "cap continuity axis at 6"
+  minor: "note only"

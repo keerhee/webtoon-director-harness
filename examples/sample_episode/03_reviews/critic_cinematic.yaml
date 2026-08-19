@@ -1,0 +1,48 @@
+candidate: cinematic
+episode_id: sample_ep01
+loop: 0
+first_impression: "Reads like a film. Every panel is legible and the room is real — but I never feel Mina's fear, only observe it."
+scores:
+  narrative_clarity:
+    score: 9
+    evidence: "P01 establishes geography and P03's frame-within-frame marks the threshold; a first-time reader can place every later panel."
+  emotional_impact:
+    score: 7
+    evidence: "P05b keeps the alcove behind her head, which is smart, but the reveal of the name is staged rather than felt."
+  visual_composition:
+    score: 9
+    evidence: "P05a's bird's-eye collapses depth to a single piece of evidence; P07 uses cable runs as convergence lines onto the core."
+  pacing_scroll:
+    score: 7
+    evidence: "Beat durations are sensible, but the sequence is designed as pages — no whitespace or panel-height plan."
+  reading_flow:
+    score: 8
+    evidence: "P06's over-shoulder moves the camera onto her eyeline before the reveal, so P07 arrives where the eye already is."
+  continuity:
+    score: 9
+    evidence: "The axis crossing is declared at P06 on a neutral panel, and the blue key stays north from P04 to P07."
+weighted_total: 8.20
+hard_failures: []
+strengths:
+  - {panel_id: P07, note: "The climax earns its wide release after a consistently tightening progression."}
+  - {panel_id: P02, note: "Symmetry used as a tool: the retracted bolt reads as wrong without a caption."}
+problems:
+  - panel_id: P03
+    severity: minor
+    axis: emotional_impact
+    problem: "Silhouette-in-doorway is a genre default; it shows the boundary without characterizing the fear."
+    revision: "Graft the emotional candidate's close on her face, keeping this framing as the panel that follows."
+    owner: emotion-director
+  - panel_id: P05b
+    severity: major
+    axis: emotional_impact
+    problem: "The name is delivered while her face is visible, so the reader watches her react instead of reacting first."
+    revision: "Crop to the stopped hand; hold the face for the panel after."
+    owner: emotion-director
+  - panel_id: P07
+    severity: major
+    axis: pacing_scroll
+    problem: "No scroll design — the reveal lands all at once instead of arriving as the reader travels."
+    revision: "Adopt the webtoon-native tall-panel disclosure: darkness first, core at the bottom."
+    owner: pacing-director
+verdict: revise

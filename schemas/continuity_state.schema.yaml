@@ -1,0 +1,72 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Continuity State
+description: Ground truth for the scene, built forward from the first panel.
+type: object
+required: [episode_id, entities, panel_states]
+additionalProperties: true
+properties:
+  episode_id: {type: string}
+  entities:
+    type: object
+    required: [characters]
+    properties:
+      characters:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          required: [id]
+          properties:
+            id: {type: string}
+            costume: {type: string}
+            handedness: {type: string, enum: [left, right, unknown]}
+            held_objects: {type: array, items: {type: string}}
+            injuries:
+              type: array
+              items:
+                type: object
+                properties:
+                  location: {type: string}
+                  since: {type: string}
+            knowledge: {type: array, items: {type: string}}
+      props:
+        type: array
+        items:
+          type: object
+          required: [id]
+          properties:
+            id: {type: string}
+            location: {type: string}
+            since: {type: string}
+      location:
+        type: object
+        properties:
+          id: {type: string}
+          geography: {type: string}
+          lighting:
+            type: object
+            properties:
+              key: {type: string}
+              ambient: {type: string}
+  timeline:
+    type: object
+    properties:
+      start: {type: string}
+      elapsed_by_last_panel: {type: string}
+  camera_axis: {type: string}
+  panel_states:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [panel_id]
+      properties:
+        panel_id: {type: string}
+        characters_present: {type: array, items: {type: string}}
+        held: {type: array, items: {type: string}}
+        light: {type: string}
+        notes: {type: string}
+  assumptions:
+    type: array
+    items: {type: string}
+    description: "Recorded rather than guessed silently."

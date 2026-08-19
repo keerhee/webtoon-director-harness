@@ -1,7 +1,44 @@
+# Fan-out modes. Each candidate is authored independently by its lead agent.
+# The point of the modes is DIVERGENCE: if two candidates agree on reveal order,
+# climactic image, and rhythm, the fan-out has failed and must be re-run.
+
 modes:
   emotional:
+    lead: emotion-director
+    output: 02_candidates/emotional.yaml
+    optimizes_for: "What the reader feels, and how long they are made to wait for it."
     priority: [emotional_beats, reaction_shots, silence, facial_expression, reveal_timing]
+    devices: [reaction_over_event, delayed_reveal, silent_panel, object_insert, micro_expression, expectation_break]
+    constraints:
+      - "Trade information density for anticipation whenever the two conflict."
+      - "Show the reaction before, or instead of, the event at least once."
+      - "Mark every silent panel and state what the silence carries."
+    fails_when: "The scene is clear and well-composed but the reader feels nothing."
+
   cinematic:
+    lead: cinematography-director
+    output: 02_candidates/cinematic.yaml
+    optimizes_for: "Where the reader looks, and what the frame withholds."
     priority: [shot_progression, composition, camera_angle, depth, lighting, visual_reveal]
+    devices: [shot_progression_curve, three_plane_depth, obstructed_reveal, negative_space, motivated_lighting, eyeline_match]
+    constraints:
+      - "Design the shot progression before assigning individual shots."
+      - "Every panel names foreground, midground, and background."
+      - "Hold the 180-degree axis, or declare the crossing on a neutral panel."
+    fails_when: "Every panel is handsome and the sequence has no rhythm."
+
   webtoon_native:
+    lead: pacing-director
+    output: 02_candidates/webtoon_native.yaml
+    optimizes_for: "How the scene behaves under a thumb on a phone."
     priority: [vertical_scroll, whitespace, long_vertical_panels, micro_panel_bursts, full_width_impact, mobile_reading_flow]
+    devices: [scroll_reveal, burst_then_hold, whitespace_beat, tall_panel_disclosure, full_width_impact]
+    constraints:
+      - "Assign a timing label to every panel before touching layout."
+      - "At most two full-width panels per scene; one of them is the climax."
+      - "No run of more than three panels at the same height."
+    fails_when: "The scene reads well as a printed page and flatlines on a phone."
+
+# Divergence check applied after fan-out. At least two of three must differ.
+divergence_axes: [reveal_order, climactic_image, rhythm_profile]
+min_differing_axes: 2
