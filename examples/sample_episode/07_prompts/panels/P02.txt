@@ -2,7 +2,15 @@
 
 ## positive
 
-korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of an object, isolated object, no people visible, eye level camera, Latch plate dead center, frame symmetrical; the bolt is retracted, Her hand entering from frame right, not yet touching, Center-weighted — the reader sees the retracted bolt before her hand arrives, Door surface, sharp, A hairline of warm light through the gap, Corridor key from behind camera; the gap light is motivated by the room
+_Full prompt. Use with a runner that chunks past 77 CLIP tokens (ComfyUI)._
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of a single object, the object fills the frame and is the only subject, no face visible, eye level camera, Latch plate dead center, frame symmetrical; the bolt is retracted, Her hand entering from frame right, not yet touching, Center-weighted — the reader sees the retracted bolt before her hand arrives, Door surface, sharp, A hairline of warm light through the gap, Corridor key from behind camera; the gap light is motivated by the room
+
+## positive (compact)
+
+_Fits in one 77-token CLIP context. Use with plain diffusers, or any runner that truncates - a truncated full prompt loses the panel's direction and keeps only the style tags._
+
+korean webtoon style, clean lineart, cel shading, extreme close-up of a single object, eye level camera, Latch plate dead center, frame symmetrical, Her hand entering from frame right, not yet touching, Corridor key from behind camera, mina_char, LOC_LAB_B3, Door surface, sharp
 
 ## negative
 

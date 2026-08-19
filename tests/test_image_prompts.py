@@ -169,3 +169,65 @@ def test_lettering_spec_lists_the_only_line(repo_root):
     assert "P05b" in text
     assert "Prop text" in text
     assert "P05a" in text
+
+
+# --- 77-token CLIP budget -------------------------------------------------
+# Found by actually rendering: a 224-token prompt was truncated by SD 1.5 to its
+# first 77 tokens, which were all style and character tags. P02 - an insert of a
+# door latch - came back as two portraits, because every word of direction had
+# been silently discarded.
+
+
+def test_compact_prompt_fits_the_clip_budget(example, profile):
+    from harness.prompts import estimate_clip_tokens
+
+    budget = profile["token_budget"]
+    for prompt in _prompts(example, profile):
+        assert estimate_clip_tokens(prompt.positive_compact) <= budget, prompt.panel_id
+
+
+def test_full_prompt_is_kept_for_chunking_runners(example, profile):
+    """ComfyUI chunks past 77 tokens, so the full prompt still has a consumer."""
+    for prompt in _prompts(example, profile):
+        assert len(prompt.positive) > len(prompt.positive_compact)
+
+
+def test_compact_prompt_leads_with_style_then_shot(example, profile):
+    prompts = {p.panel_id: p for p in _prompts(example, profile)}
+    compact = prompts["P01"].positive_compact
+    assert compact.startswith("korean webtoon style")
+    assert "extreme wide shot" in compact.split(",")[3]
+
+
+def test_insert_panels_do_not_spend_the_budget_on_faces(example, profile):
+    """The bug that produced portraits for a door latch."""
+    p02 = next(p for p in _prompts(example, profile) if p.panel_id == "P02")
+    assert "extreme close-up of a single object" in p02.positive_compact
+    assert "Latch plate" in p02.positive_compact
+    assert "black hair" not in p02.positive_compact
+
+
+def test_character_panels_still_carry_identity_in_compact(example, profile):
+    p03 = next(p for p in _prompts(example, profile) if p.panel_id == "P03")
+    assert "mina_char" in p03.positive_compact
+    assert "black hair" in p03.positive_compact
+    assert "mole" in p03.positive_compact
+
+
+def test_compact_never_truncates_mid_phrase(example, profile):
+    """"the object fills the" costs tokens and reads as noise. Cut at a comma."""
+    for prompt in _prompts(example, profile):
+        for tag in prompt.positive_compact.split(","):
+            assert not tag.strip().endswith((" the", " a", " of", " and", " with")), prompt.panel_id
+
+
+def test_compact_drops_literal_none(example, profile):
+    for prompt in _prompts(example, profile):
+        assert "None" not in prompt.positive_compact, prompt.panel_id
+
+
+def test_token_estimate_is_conservative():
+    from harness.prompts import estimate_clip_tokens
+
+    assert estimate_clip_tokens("a b c") >= 3
+    assert estimate_clip_tokens("") == 2

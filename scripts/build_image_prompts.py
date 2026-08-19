@@ -132,7 +132,15 @@ def main(argv: list[str] | None = None) -> int:
     _write(out / "refs" / "REFERENCE_SHEETS.md", "\n".join(ref_lines))
 
     for prompt in prompts:
-        body = [f"# {prompt.panel_id}", "", "## positive", "", prompt.positive, "",
+        body = [f"# {prompt.panel_id}", "",
+                "## positive", "",
+                "_Full prompt. Use with a runner that chunks past 77 CLIP tokens (ComfyUI)._", "",
+                prompt.positive, "",
+                "## positive (compact)", "",
+                "_Fits in one 77-token CLIP context. Use with plain diffusers, or any runner "
+                "that truncates - a truncated full prompt loses the panel's direction and keeps "
+                "only the style tags._", "",
+                prompt.positive_compact, "",
                 "## negative", "", prompt.negative, "",
                 "## generation", "",
                 f"- target size : {prompt.target_width} x {prompt.target_height}",

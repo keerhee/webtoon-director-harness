@@ -85,6 +85,48 @@ Panels whose direction needs readable writing inside the art — a name on a dro
 are flagged under **Prop text** in `lettering.md`. The plate is rendered blank; the writing is added
 with the balloons.
 
+## The 77-token wall
+
+SD 1.5 and SDXL encode text with CLIP, which stops at **77 tokens** and silently discards the rest.
+A prompt assembled from full panel direction runs 200–300 tokens, so the tail — the shot, the
+composition, the lighting, everything that makes the panel *this* panel — is thrown away, and what
+survives is the style anchor and the character description.
+
+This is not theoretical. The first render of `P02` in the sample episode, an insert of a door latch
+with no people in it, came back as two portraits: the prompt had been cut at token 77, and every
+word of direction was in the discarded remainder.
+
+So each panel gets two prompts:
+
+| Prompt | For | Built how |
+|---|---|---|
+| `positive` | Runners that chunk past 77 tokens (ComfyUI does) | Full direction, verbatim |
+| `positive_compact` | Anything that truncates — plain diffusers, most scripts | Priority-ordered, trimmed to fit |
+
+The compact prompt keeps, in order: style anchor, shot, angle, subject, composition, lighting,
+location. For an **insert** the character tokens are demoted below composition — an insert is about
+the object, and spending the budget on a face is precisely how a door latch became a portrait.
+Truncation happens at commas, never mid-phrase, because "the object fills the" costs tokens and
+reads as noise.
+
+`estimate_clip_tokens()` is deliberately conservative; a test asserts every compact prompt fits.
+
+## Rendering without a GPU
+
+`scripts/render_local.py` is a fallback runner for machines with no CUDA device. It uses
+Stable Diffusion 1.5 with LCM-LoRA at 8 steps — the only combination that finishes in a sane time
+on a CPU while still permitting commercial use.
+
+```bash
+python scripts/render_local.py examples/sample_episode --scale 0.5
+python scripts/render_local.py _workspace/ep01 --only P05a --skip-existing
+```
+
+Measured on an i5-8250U (4 cores, integrated graphics, no CUDA): **about 4 minutes per panel** at
+640×384, plus ~50 s to load the pipeline. A seven-panel scene with sectioned tall panels and two
+reference sheets is roughly an hour. It proves the pipeline end to end; it is not production quality.
+With a CUDA GPU, use ComfyUI and a proper checkpoint instead — the same prompts and seeds apply.
+
 ## The validate-and-regenerate loop
 
 Validate **each panel as it lands**, never at the end. Six axes — character consistency, location

@@ -9,6 +9,10 @@
 name: comfyui
 prompt_style: tag          # comma-separated tags, not prose
 supports_negative: true
+# SD 1.5 and SDXL text encoders truncate at 77 CLIP tokens, silently discarding
+# whatever came last. ComfyUI chunks past that; plain diffusers does not. Every
+# panel therefore also gets a compact prompt built to fit inside this budget.
+token_budget: 77
 
 canvas:
   width: 800               # standard vertical-scroll strip width in px
@@ -25,6 +29,7 @@ canvas:
 # Prepended to every panel. Set the tone once; do not repeat it per panel.
 style_anchor:
   base: "korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration"
+  compact: "korean webtoon style, clean lineart, cel shading"
   quality: "highly detailed, sharp focus, professional comic art"
   # Tone tags come from normalized_input.yaml `tone`, mapped loosely.
   tone_map:
@@ -51,7 +56,7 @@ shot:
   medium_close:  "medium close-up, chest up"
   close:         "close-up, head and shoulders, facial expression emphasis"
   extreme_close: "extreme close-up, macro detail, partial face or hand fills frame"
-  insert:        "extreme close-up of an object, isolated object, no people visible"
+  insert:        "extreme close-up of a single object, the object fills the frame and is the only subject, no face visible"
   over_shoulder: "over the shoulder shot, blurred foreground shoulder, subject beyond"
   pov:           "first person point of view, subjective camera"
   two_shot:      "two characters in frame, space between them"

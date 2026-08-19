@@ -2,7 +2,15 @@
 
 ## positive
 
-korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of an object, isolated object, no people visible, bird's eye view, directly overhead, top down, Card isolated on the floor grid, off-center; her shadow enters from the top edge, Mina present only as a shadow, The shadow is the leading line and terminates on the card, Floor, sharp at the card, falling off at the edges, Blue pulse skimming the card face; the name is legible to the reader
+_Full prompt. Use with a runner that chunks past 77 CLIP tokens (ComfyUI)._
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of a single object, the object fills the frame and is the only subject, no face visible, bird's eye view, directly overhead, top down, Card isolated on the floor grid, off-center; her shadow enters from the top edge, Mina present only as a shadow, The shadow is the leading line and terminates on the card, Floor, sharp at the card, falling off at the edges, Blue pulse skimming the card face; the name is legible to the reader
+
+## positive (compact)
+
+_Fits in one 77-token CLIP context. Use with plain diffusers, or any runner that truncates - a truncated full prompt loses the panel's direction and keeps only the style tags._
+
+korean webtoon style, clean lineart, cel shading, extreme close-up of a single object, bird's eye view, directly overhead, no people in frame, Card isolated on the floor grid, off-center, Mina present only as a shadow, Blue pulse skimming the card face, LOC_LAB_B3
 
 ## negative
 

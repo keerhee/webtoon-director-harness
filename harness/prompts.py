@@ -32,6 +32,7 @@ class RenderSection:
 class PanelPrompt:
     panel_id: str
     positive: str
+    positive_compact: str
     negative: str
     target_width: int
     target_height: int
@@ -55,6 +56,7 @@ class PanelPrompt:
         return {
             "panel_id": self.panel_id,
             "positive": self.positive,
+            "positive_compact": self.positive_compact,
             "negative": self.negative,
             "target_size": [self.target_width, self.target_height],
             "gen_size": [self.gen_width, self.gen_height],
@@ -125,6 +127,57 @@ def character_tokens(continuity: dict[str, Any]) -> dict[str, str]:
     return tokens
 
 
+def estimate_clip_tokens(text: str) -> int:
+    """Rough CLIP BPE token count. Words plus punctuation, with a safety margin.
+
+    Exact tokenization needs the model; this only has to be conservative enough that
+    the compact prompt never crosses 77 and loses the panel's direction.
+    """
+    words = [w for w in text.replace(",", " , ").split() if w]
+    return int(len(words) * 1.35) + 2
+
+
+def _first_clause(value: Any, limit: int = 12) -> str:
+    """Keep the load-bearing clause of a direction sentence, drop the elaboration.
+
+    Truncation happens at a comma, never mid-phrase: "the object fills the" is worse
+    than saying nothing, because a half-sentence still costs tokens and reads as noise.
+    """
+    text = str(value or "").strip()
+    if not text or text.lower().startswith("none"):
+        return ""
+    for sep in (";", " - ", " — "):
+        if sep in text:
+            text = text.split(sep)[0]
+    text = text.split(".")[0].strip().rstrip(",")
+
+    kept: list[str] = []
+    used = 0
+    for tag in [t.strip() for t in text.split(",") if t.strip()]:
+        words = len(tag.split())
+        if kept and used + words > limit:
+            break
+        kept.append(tag)
+        used += words
+    return ", ".join(kept)
+
+
+def compact_prompt(fragments: list[tuple[int, str]], budget: int) -> str:
+    """Assemble the highest-priority fragments that fit inside a CLIP context.
+
+    SD 1.5 and SDXL silently truncate at 77 tokens, discarding whatever came last -
+    which, in a naively built prompt, is the panel's actual direction. Ordering by
+    priority and dropping from the bottom keeps the shot instead of the adjectives.
+    """
+    kept: list[str] = []
+    for _, fragment in sorted(fragments, key=lambda item: item[0]):
+        candidate = ", ".join(kept + [fragment])
+        if estimate_clip_tokens(candidate) > budget:
+            continue
+        kept.append(fragment)
+    return ", ".join(kept)
+
+
 def _round_to(value: float, step: int) -> int:
     return max(step, int(round(value / step) * step))
 
@@ -192,6 +245,25 @@ def _lora_fragment(char_id: str, profile: dict[str, Any]) -> str:
     if entry.get("trigger"):
         fragments.append(str(entry["trigger"]))
     return ", ".join(fragments)
+
+
+def _compact_character(continuity: dict[str, Any], char_id: str) -> str:
+    """A short, high-signal identity token: build, hair, costume, one mark."""
+    for char in ((continuity or {}).get("entities") or {}).get("characters") or []:
+        if str(char.get("id")) != char_id:
+            continue
+        parts = [char_id]
+        if char.get("appearance"):
+            parts.append(_first_clause(char["appearance"], 8))
+        if char.get("costume"):
+            parts.append(_first_clause(char["costume"], 6))
+        for mark in char.get("marks") or []:
+            if isinstance(mark, dict) and mark.get("mark"):
+                side = f" on the {mark['side']}" if mark.get("side") else ""
+                parts.append(f"{_first_clause(mark['mark'], 5)}{side}")
+                break
+        return ", ".join(p for p in parts if p)
+    return char_id
 
 
 def _requires_legible_text(panel: dict[str, Any], profile: dict[str, Any]) -> str:
@@ -293,9 +365,47 @@ def build_panel_prompt(
     if panel.get("dialogue"):
         notes.append("Carries dialogue: art is rendered text-free; balloons are lettered afterwards.")
 
+    # A compact variant for runners whose text encoder truncates at 77 tokens.
+    # Style leads (CLIP weights earlier tokens more), then what the panel IS,
+    # then who is in it, then how it is lit.
+    anchor = profile.get("style_anchor") or {}
+    compact_fragments: list[tuple[int, str]] = [
+        (0, anchor.get("compact", anchor.get("base", ""))),
+    ]
+    if shot:
+        compact_fragments.append((1, _first_clause(shot, 12)))
+    if angle:
+        compact_fragments.append((1, _first_clause(angle, 6)))
+    # An insert is about the object. A character may be partly in frame (a hand, a
+    # shadow) but spending the budget on their face tokens is how a door latch turns
+    # into a portrait - which is exactly what an unbudgeted prompt produced.
+    is_insert = panel.get("shot") == "insert"
+    char_priority = 7 if is_insert else 2
+    composition_priority = 2 if is_insert else 4
+
+    if present:
+        for char_id in present:
+            lora = _lora_fragment(char_id, profile)
+            if lora:
+                compact_fragments.append((char_priority, lora))
+            compact_fragments.append((char_priority + 1, _compact_character(continuity, char_id)))
+    else:
+        compact_fragments.append((2, "no people in frame"))
+    compact_fragments.append((composition_priority, _first_clause(panel.get("composition"), 14)))
+    if is_insert:
+        compact_fragments.append((3, _first_clause(panel.get("character_blocking"), 10)))
+    compact_fragments.append((5, _first_clause(panel.get("lighting"), 10)))
+    compact_fragments.append((7, loc_token))
+    compact_fragments.append((8, _first_clause(panel.get("background"), 8)))
+    compact_fragments.append((9, _first_clause(panel.get("foreground"), 8)))
+
+    budget = int(profile.get("token_budget", 77))
+    compact = compact_prompt([(p, f) for p, f in compact_fragments if f], budget)
+
     return PanelPrompt(
         panel_id=panel_id,
         positive=positive,
+        positive_compact=compact,
         negative=" ".join(str(profile.get("negative", "")).split()),
         target_width=width,
         target_height=height,

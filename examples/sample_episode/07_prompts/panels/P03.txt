@@ -2,7 +2,15 @@
 
 ## positive
 
+_Full prompt. Use with a runner that chunks past 77 CLIP tokens (ComfyUI)._
+
 korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), close-up, head and shoulders, facial expression emphasis, eye level camera, Her face at the left frame edge; two-thirds of the panel is the dark she is looking into, One step across the threshold, weight still on the back foot, Into the dark; pupils wide, one blink held a beat too long, Door edge, near-black, framing the left, Undifferentiated dark — the room withholds itself, Corridor backlight dying across her cheek
+
+## positive (compact)
+
+_Fits in one 77-token CLIP context. Use with plain diffusers, or any runner that truncates - a truncated full prompt loses the panel's direction and keeps only the style tags._
+
+korean webtoon style, clean lineart, cel shading, close-up, head and shoulders, facial expression emphasis, eye level camera, mina_char, mina, late twenties, straight black hair tied back, Field jacket over lab shirt, small mole under the eye on the left, LOC_LAB_B3, Undifferentiated dark
 
 ## negative
 
