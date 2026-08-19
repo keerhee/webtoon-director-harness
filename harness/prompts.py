@@ -428,11 +428,31 @@ def build_reference_sheets(continuity: dict[str, Any], profile: dict[str, Any],
     compares each panel against.
     """
     anchor = style_anchor(profile, tone)
+    style = profile.get("style_anchor") or {}
+    budget = int(profile.get("token_budget", 77))
     sheets = {}
     for char_id, tokens in character_tokens(continuity).items():
         lora = _lora_fragment(char_id, profile)
         head = ", ".join(f for f in (anchor, lora, tokens) if f)
+        # The sheet framing is the point of the artifact, so it leads the compact
+        # variant; a truncated sheet prompt yields a portrait, not a model sheet.
+        compact_head = [
+            (0, "character reference sheet, model sheet, same character repeated"),
+            (2, lora),
+            (3, _compact_character(continuity, char_id)),
+            (4, style.get("compact", "")),
+        ]
         sheets[char_id] = {
+            "turnaround_compact": compact_prompt(
+                compact_head + [
+                    (1, "front view, three-quarter view, side view, back view, full body"),
+                    (5, "neutral grey background, even flat lighting, neutral expression"),
+                ], budget),
+            "expressions_compact": compact_prompt(
+                compact_head + [
+                    (1, "four head and shoulders portraits, expression sheet"),
+                    (5, "neutral grey background, even flat lighting"),
+                ], budget),
             "turnaround": (
                 f"{head}, character reference sheet, model sheet, same character repeated, "
                 "front view, three-quarter view, side view, back view, full body, "

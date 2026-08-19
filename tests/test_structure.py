@@ -86,3 +86,17 @@ def test_readmes_cross_link(repo_root):
     korean = (repo_root / "README.ko.md").read_text(encoding="utf-8")
     assert "README.ko.md" in english
     assert "README.md" in korean
+
+
+def test_init_creates_every_documented_stage(repo_root):
+    """The workspace contract in CLAUDE.md and init_episode.py must not drift apart."""
+    from harness.artifacts import STAGE_DIRS
+
+    contract = (repo_root / ".claude" / "CLAUDE.md").read_text(encoding="utf-8")
+    for stage in STAGE_DIRS:
+        top = stage.split("/")[0]
+        assert top in contract, f"{top} is created but undocumented"
+    for documented in ("06_handoff", "07_prompts", "08_panels"):
+        assert any(s.startswith(documented) for s in STAGE_DIRS), (
+            f"{documented} is documented but init_episode.py never creates it"
+        )

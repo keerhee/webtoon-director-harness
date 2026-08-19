@@ -25,6 +25,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+from harness.prompts import stable_seed  # noqa: E402
+
 BASE_MODEL = "stable-diffusion-v1-5/stable-diffusion-v1-5"
 LCM_LORA = "latent-consistency/lcm-lora-sdv1-5"
 
@@ -103,8 +105,10 @@ def main(argv: list[str] | None = None) -> int:
     if not wanted or "refs" in wanted:
         for char_id, sheet in (manifest.get("reference_sheets") or {}).items():
             for kind in ("turnaround", "expressions"):
-                jobs.append((f"REF_{char_id}_{kind}", sheet[kind], sheet["negative"],
-                             768, 512, abs(hash(char_id + kind)) % (2**31)))
+                key = kind if args.full_prompt else f"{kind}_compact"
+                jobs.append((f"REF_{char_id}_{kind}", sheet.get(key, sheet[kind]),
+                             sheet["negative"], 704, 448,
+                             stable_seed(manifest.get("episode_id", "ep"), f"REF_{char_id}_{kind}")))
 
     for panel in manifest.get("panels", []):
         if wanted and panel["panel_id"] not in wanted:

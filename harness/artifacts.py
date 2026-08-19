@@ -29,6 +29,7 @@ STAGE_DIRS = (
     "05_continuity",
     "06_handoff",
     "07_prompts",
+    "08_panels",
 )
 
 #: Artifact filename -> schema filename.
