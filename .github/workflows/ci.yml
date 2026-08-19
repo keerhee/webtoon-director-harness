@@ -60,6 +60,11 @@ jobs:
           python scripts/score_direction.py examples/sample_episode/00_input/breakdown/critic_*.yaml --gate breakdown --quiet || true
           python scripts/score_direction.py examples/sample_episode/00_input/breakdown/critic_spacious.yaml --gate breakdown
 
+      - name: Rebuild the example image prompts and check for drift
+        run: |
+          python scripts/build_image_prompts.py examples/sample_episode
+          git diff --exit-code examples/sample_episode/07_prompts
+
       - name: Smoke-test episode init
         run: |
           python scripts/init_episode.py ci_demo --from-example

@@ -3,6 +3,9 @@ loop: 2
 entities:
   characters:
     - id: mina
+      appearance: "late twenties, straight black hair tied back, tired dark eyes, slim build"
+      marks:
+        - {mark: "small mole under the eye", side: left}
       costume: "Field jacket over lab shirt, ID lanyard tucked in, hair tied back."
       handedness: right
       held_objects: [tablet]

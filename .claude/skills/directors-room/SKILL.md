@@ -81,6 +81,12 @@ python scripts/validate_handoff.py _workspace/<episode>/06_handoff
 python scripts/validate_artifacts.py _workspace/<episode>
 ```
 
+## 8. Optional — Stage 3 render
+The handoff is production-neutral and complete on its own. If the user wants images, the
+`panel-render` skill renders them locally and free with ComfyUI: prompts, reference sheets first,
+then panels with a validate-and-re-render loop, then lettering. Offer it; do not start it
+unprompted, because it costs GPU hours.
+
 ## Reporting
 Close with: selected approach and why, weighted score and loop count, grafts from alternate
 candidates, unresolved continuity items, and the top production risk.

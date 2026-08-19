@@ -1,0 +1,97 @@
+# ComfyUI / local Stable Diffusion profile.
+#
+# Fully offline: no API key, no account, no per-image cost. Everything below assumes
+# a local checkpoint (SDXL-family or FLUX.1 schnell) driven by ComfyUI.
+#
+# This file is the ONLY place model-specific wording lives. The harness artifacts
+# stay production-neutral; swap this profile to target a different generator.
+
+name: comfyui
+prompt_style: tag          # comma-separated tags, not prose
+supports_negative: true
+
+canvas:
+  width: 800               # standard vertical-scroll strip width in px
+  viewport_height: 1280    # 1.0 panel_height == one phone screen
+  # Generation happens near 1 megapixel and is upscaled to the target size,
+  # because SDXL and FLUX both degrade badly outside their trained resolution.
+  target_pixels: 1048576
+  round_to: 64             # both dimensions must be multiples of 64
+  max_side: 1536
+  # Above this height/width ratio a panel is rendered in overlapping sections.
+  section_split_ratio: 2.0
+  section_overlap: 0.15
+
+# Prepended to every panel. Set the tone once; do not repeat it per panel.
+style_anchor:
+  base: "korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration"
+  quality: "highly detailed, sharp focus, professional comic art"
+  # Tone tags come from normalized_input.yaml `tone`, mapped loosely.
+  tone_map:
+    tense: "tense atmosphere, high contrast, restrained palette"
+    restrained: "muted desaturated palette, minimal ornament"
+    warm: "warm palette, soft light"
+    bleak: "cold desaturated palette, heavy shadow"
+
+# Never generate text: balloons and SFX are added at the lettering stage, and
+# baked-in glyphs cannot be removed without repainting the panel.
+negative: >-
+  text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark,
+  signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs,
+  malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts,
+  panel border, frame, comic page layout, multiple panels, collage, split screen,
+  photorealistic, 3d render
+
+shot:
+  extreme_wide:  "extreme wide shot, establishing shot, small distant figure, vast environment"
+  wide:          "wide shot, full body in environment, environment readable"
+  full:          "full body shot, head to feet, minimal background"
+  medium_full:   "medium full shot, knees up"
+  medium:        "medium shot, waist up"
+  medium_close:  "medium close-up, chest up"
+  close:         "close-up, head and shoulders, facial expression emphasis"
+  extreme_close: "extreme close-up, macro detail, partial face or hand fills frame"
+  insert:        "extreme close-up of an object, isolated object, no people visible"
+  over_shoulder: "over the shoulder shot, blurred foreground shoulder, subject beyond"
+  pov:           "first person point of view, subjective camera"
+  two_shot:      "two characters in frame, space between them"
+
+angle:
+  eye_level: "eye level camera"
+  high:      "high angle, camera looking down"
+  low:       "low angle, camera looking up"
+  birds_eye: "bird's eye view, directly overhead, top down"
+  worms_eye: "worm's eye view, extreme low angle"
+  dutch:     "dutch angle, tilted horizon"
+  profile:   "profile view, strict side view"
+  back:      "seen from behind, back of the character"
+
+# beat_duration does not change the image, but it does change how much room the
+# panel gets in the strip, which the render plan needs.
+beat_duration_note:
+  instant:   "compact panel"
+  short:     "compact panel"
+  medium:    "standard panel"
+  hold:      "generous panel, room to breathe"
+  long_hold: "large panel, dominant composition"
+
+# Direction that asks for readable writing inside the art conflicts with the text
+# negatives. Panels matching these are flagged for the lettering pass instead of
+# having one side of the conflict silently dropped.
+text_in_art_keywords: [legible, readable, "name visible", "writing visible"]
+
+# Appended when the panel reserves balloon space, so the letterer is not fighting
+# a composition that left nowhere to put the words.
+dialogue_space_tag: "clear empty negative space reserved for lettering"
+
+# Character LoRAs. Train one per recurring character from its character sheet;
+# until then leave `lora` null and the trigger word carries the description.
+character_loras:
+  mina:
+    lora: null              # e.g. "mina_v1.safetensors"
+    weight: 0.8
+    trigger: "mina_char"
+
+sampler_defaults:
+  sdxl:   {steps: 30, cfg: 6.0, sampler: dpmpp_2m, scheduler: karras}
+  flux_schnell: {steps: 4, cfg: 1.0, sampler: euler, scheduler: simple}

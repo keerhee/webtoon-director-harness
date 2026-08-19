@@ -1,0 +1,17 @@
+# P06
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), over the shoulder shot, blurred foreground shoulder, subject beyond, eye level camera, Narrow vertical sliver, right-aligned and cramped; her shoulder fills the left, the alcove mouth sits on the right third, Rising, head turning toward the back of the room, Over-shoulder framing hands the reader her eyeline without giving up her face, Shoulder and jaw, dark and soft, Alcove, still partly obstructed by a cable rack, Blue growing; contrast climbing toward the reveal
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 1152
+- generate at : 832 x 1216  (upscale x0.947)
+- seed        : 1922524460
+- characters  : mina
+- location    : LOC_LAB_B3

@@ -53,6 +53,10 @@
                         │ 통과
                         ▼
           제작 인계 / Stage 2
+                        │
+                        ▼   (선택, 요청 시에만)
+          Stage 3  패널 렌더 — 로컬 ComfyUI, 완전 무료
+          레퍼런스 시트 우선 ▸ 렌더 ▸ 검증 ▸ 재생성 ▸ 레터링
 ```
 
 자세한 내용: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/WORKFLOW.md](docs/WORKFLOW.md)
@@ -70,6 +74,8 @@
 | **Dialogue & Silence Editor** | 압축, 서브텍스트, 말풍선 순서, SFX, 침묵 |
 | **Continuity Supervisor** | 인물·소품·공간·조명·시간선·지식 상태 |
 | **Direction Critic** | 6축 근거 기반 채점, 수정 요청 |
+| **Prompt Smith** | 이미지 프롬프트, 일관성 토큰, 네거티브 — Stage 3 |
+| **Panel Validator** | 렌더 결과 6축 검증과 제한된 재생성 루프 — Stage 3 |
 
 역할 매트릭스와 설계 근거: [docs/AGENTS.md](docs/AGENTS.md)
 
@@ -121,6 +127,33 @@ python scripts/init_episode.py demo --from-example
 있습니다. [`06_handoff/direction_bible.md`](examples/sample_episode/06_handoff/direction_bible.md)와
 [`04_synthesis/decision_log.md`](examples/sample_episode/04_synthesis/decision_log.md)부터 읽어 보세요.
 
+## 이미지: 완전 무료·로컬 (Stage 3)
+
+인계 산출물은 텍스트이고, 의도적으로 **제작 중립**입니다 — 어떤 이미지 모델도 지정하지 않습니다.
+그림이 필요해지면 Stage 3가 **내 컴퓨터에서 비용 0으로** 렌더합니다. ComfyUI + SDXL 계열 또는
+FLUX.1 schnell. API 키도, 계정도, 외부 전송도 없습니다.
+
+```bash
+python scripts/build_image_prompts.py _workspace/ep01
+```
+
+`07_prompts/`가 생성됩니다 — 스타일 앵커, 네거티브, 인물 고정 토큰, `LOC_*` 장소 토큰,
+레퍼런스 시트 프롬프트, 컷별 프롬프트(고정 시드), 레터링 스펙. 이어서 `panel-render` 스킬이
+**레퍼런스 시트를 먼저** 렌더하고, 컷마다 검증-재생성 루프를 돌린 뒤 레터링으로 넘깁니다.
+
+손으로 프롬프트를 쓸 때 대개 놓치는 세 가지를 자동으로 처리합니다.
+
+- **일관성은 기대하는 게 아니라 설계하는 것.** 인물 토큰에 식별 표식과 **좌/우 위치**가 들어가고,
+  장소 토큰이 장면 중 배경 급변을 막으며, 시드는 `episode_id:panel_id`에서 파생되어 재렌더가
+  재현 가능합니다 — 내가 바꾼 것만 결과가 달라집니다.
+- **긴 컷은 분할 렌더.** 2.6화면짜리 클라이맥스 컷을 정사각형에 욱여넣지 않고 겹치는 구간으로
+  나눠 렌더한 뒤 이어붙입니다.
+- **작화는 텍스트 없이.** 로컬 모델은 한글을 제대로 못 그립니다. 그래서 깨끗한 판을 렌더하고,
+  연출이 미리 비워 둔 말풍선 자리에 나중에 글자를 얹습니다. 대사를 고쳐도 재렌더가 아니라
+  레터링만 다시 하면 됩니다.
+
+설치·하드웨어·일관성 기법·체크포인트 라이선스: [docs/IMAGE_PIPELINE.md](docs/IMAGE_PIPELINE.md)
+
 ## 입력과 출력
 
 ```text
@@ -134,6 +167,8 @@ _workspace/<episode>/
   05_continuity/  continuity_state.yaml · continuity_report.yaml
   06_handoff/     direction_bible.md · panel_direction.yaml · continuity_state.yaml
                   critic_report.md · stage2_handoff.md
+  07_prompts/     이미지 프롬프트, 레퍼런스 시트, 레터링 스펙   (Stage 3)
+  08_panels/      렌더된 PNG + validation.md                    (Stage 3)
 ```
 
 인계 산출물은 **제작 중립적**입니다. 특정 이미지 모델·작화 도구·스튜디오 파이프라인을 전제하지
@@ -223,7 +258,7 @@ pytest
 ## 저장소 구조
 
 ```text
-.claude/          에이전트 9종 + 스킬 5종 + 프로젝트 지침 (창작 코어)
+.claude/          에이전트 11종 + 스킬 6종 + 프로젝트 지침 (창작 코어)
 harness/          채점·설정 로딩·아티팩트 검증 (결정론적 코어)
 config/           품질 게이트, 연출 모드, 통제 어휘
 schemas/          모든 구조화 산출물의 JSON Schema
@@ -231,7 +266,7 @@ scripts/          init_episode · score_direction · validate_artifacts · valid
 templates/        디렉션 바이블 · 크리틱 리포트 · Stage 2 인계서
 docs/             아키텍처 · 워크플로 · 채점 · 에이전트 · 연출 언어
 examples/         CI에서 검증되는 완주 예제 에피소드
-adapters/         상위 도구와의 파일 기반 연동 문서
+adapters/         상위 도구 어댑터, 생성기별 이미지 프롬프트 프로필
 tests/            구조 · 프롬프트 · 스키마 · 채점 · 예제 정합성 테스트
 ```
 

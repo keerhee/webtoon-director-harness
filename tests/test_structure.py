@@ -25,6 +25,9 @@ REQUIRED_FILES = [
     "docs/SCORING.md",
     "docs/AGENTS.md",
     "docs/DIRECTION_LANGUAGE.md",
+    "docs/IMAGE_PIPELINE.md",
+    "adapters/image-prompt/profiles/comfyui.yaml",
+    "scripts/build_image_prompts.py",
     "README.md",
     "README.ko.md",
     "LICENSE",
@@ -34,6 +37,8 @@ REQUIRED_FILES = [
 REQUIRED_AGENTS = [
     "showrunner",
     "breakdown-director",
+    "prompt-smith",
+    "panel-validator",
     "narrative-director",
     "cinematography-director",
     "emotion-director",
@@ -49,6 +54,7 @@ REQUIRED_SKILLS = [
     "panel-direction",
     "continuity-check",
     "quality-loop",
+    "panel-render",
 ]
 
 

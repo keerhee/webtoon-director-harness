@@ -1,0 +1,21 @@
+# P05a
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of an object, isolated object, no people visible, bird's eye view, directly overhead, top down, Card isolated on the floor grid, off-center; her shadow enters from the top edge, Mina present only as a shadow, The shadow is the leading line and terminates on the card, Floor, sharp at the card, falling off at the edges, Blue pulse skimming the card face; the name is legible to the reader
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 640
+- generate at : 1152 x 896  (upscale x0.714)
+- seed        : 1908865733
+- characters  : none
+- location    : LOC_LAB_B3
+
+## notes
+
+- Direction requires legible writing in the art (the name is legible to the reader). Local diffusion models cannot render Korean reliably, so the plate stays text-free and the writing is added at lettering - see lettering.md. Do not remove the text negatives.

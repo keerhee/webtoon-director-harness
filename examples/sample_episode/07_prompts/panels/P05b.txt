@@ -1,0 +1,21 @@
+# P05b
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up, macro detail, partial face or hand fills frame, low angle, camera looking up, Her hand stopped halfway down, fingers open; the alcove glow stays visible past her wrist, Crouching; head turned down and away from the alcove, Off-frame, fixed on the card the reader can no longer see, Out-of-focus card edge at the bottom of frame, Alcove glow, soft, behind her, Blue from below, lifting the underside of her fingers; dim corridor fill behind, clear empty negative space reserved for lettering, Upper-right, clear of the hand
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 896
+- generate at : 960 x 1088  (upscale x0.824)
+- seed        : 313615125
+- characters  : mina
+- location    : LOC_LAB_B3
+
+## notes
+
+- Carries dialogue: art is rendered text-free; balloons are lettered afterwards.

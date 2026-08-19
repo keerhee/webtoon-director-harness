@@ -1,0 +1,26 @@
+# P04
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), medium shot, waist up, eye level camera, Tall panel; Mina in the lower quarter, the right two-thirds empty. Blue spill enters from the top edge, Turned toward the unseen source, shoulders squared, Negative space in front of her holds the anticipation; the eye travels down into her, Bench edge crossing the bottom of frame, The source stays off-panel; only its spill is visible, Blue key from the north alcove, raking; corridor warmth cut at the threshold
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 2304
+- generate at : 768 x 1344  (upscale x1.714)
+- seed        : 1540553742
+- characters  : mina
+- location    : LOC_LAB_B3
+
+## sections
+
+- 1/2 at 768x1344 - upper portion of the panel
+- 2/2 at 768x1344 - lower portion of the panel
+
+## notes
+
+- Tall panel (2304px): render 2 overlapping sections and stitch. Keep the payoff at the bottom - the scroll reveal is the beat.

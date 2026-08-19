@@ -53,6 +53,10 @@ Upstream story, script, or storyboard / Stage 1
                               │ pass
                               ▼
                 Production Handoff / Stage 2
+                              │
+                              ▼   (optional, on request)
+                Stage 3  Panel Render — local ComfyUI, free
+                refs first ▸ render ▸ validate ▸ regen ▸ letter
 ```
 
 Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/WORKFLOW.md](docs/WORKFLOW.md)
@@ -70,6 +74,8 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/WORKFLOW.md](docs
 | **Dialogue & Silence Editor** | Compression, subtext, balloon order, SFX, silence |
 | **Continuity Supervisor** | Characters, props, geography, lighting, timeline, knowledge state |
 | **Direction Critic** | Six-axis scoring with evidence, revision requests |
+| **Prompt Smith** | Image prompts, consistency tokens, negatives — Stage 3 |
+| **Panel Validator** | Six-axis render check with a bounded re-render loop — Stage 3 |
 
 Role matrix and rationale: [docs/AGENTS.md](docs/AGENTS.md)
 
@@ -121,6 +127,34 @@ handoff package. Start with
 [`06_handoff/direction_bible.md`](examples/sample_episode/06_handoff/direction_bible.md) and
 [`04_synthesis/decision_log.md`](examples/sample_episode/04_synthesis/decision_log.md).
 
+## Images: free and local (Stage 3)
+
+The handoff is text, and production-neutral by design — it names no image model. When you want
+pictures, Stage 3 renders them **on your own machine at zero cost**: ComfyUI plus an SDXL-family or
+FLUX.1 schnell checkpoint. No API key, no account, nothing leaves the computer.
+
+```bash
+python scripts/build_image_prompts.py _workspace/ep01
+```
+
+That writes `07_prompts/` — style anchor, negatives, immutable character tokens, `LOC_*` location
+tokens, reference-sheet prompts, one prompt per panel with a deterministic seed, and a lettering
+spec. Then the `panel-render` skill renders reference sheets first, generates panels with a
+per-panel validate-and-re-render loop, and hands off to lettering.
+
+Three things the builder does that hand-written prompts usually miss:
+
+- **Consistency is engineered, not hoped for.** Character tokens carry identifying marks *with their
+  side*; location tokens keep the background from drifting mid-scene; seeds are derived from
+  `episode_id:panel_id`, so a re-render is reproducible and a diff shows what your edit changed.
+- **Tall panels are sectioned.** A 2.6-screen climax panel is rendered in overlapping passes rather
+  than squashed into a square.
+- **The art is text-free.** Local models cannot render Korean reliably, so panels are clean plates
+  and text is lettered into the balloon space the direction reserved. A dialogue change then costs a
+  lettering pass instead of a re-render.
+
+Setup, hardware, consistency methods, and checkpoint licensing: [docs/IMAGE_PIPELINE.md](docs/IMAGE_PIPELINE.md).
+
 ## Inputs and outputs
 
 ```text
@@ -134,6 +168,8 @@ _workspace/<episode>/
   05_continuity/  continuity_state.yaml · continuity_report.yaml
   06_handoff/     direction_bible.md · panel_direction.yaml · continuity_state.yaml
                   critic_report.md · stage2_handoff.md
+  07_prompts/     image prompts, reference sheets, lettering spec   (Stage 3)
+  08_panels/      rendered PNGs + validation.md                     (Stage 3)
 ```
 
 Handoff files are **production-neutral** — no image model, art tool, or studio pipeline is assumed.
@@ -172,7 +208,7 @@ Reference: [docs/DIRECTION_LANGUAGE.md](docs/DIRECTION_LANGUAGE.md)
 ## Repository layout
 
 ```text
-.claude/          9 agents + 5 skills + project instructions (the creative core)
+.claude/          11 agents + 6 skills + project instructions (the creative core)
 harness/          scoring, config loading, artifact validation (the deterministic core)
 config/           quality gate, direction modes, controlled vocabulary
 schemas/          JSON Schema for every structured artifact
@@ -180,7 +216,7 @@ scripts/          init_episode · score_direction · validate_artifacts · valid
 templates/        direction bible · critic report · stage 2 handoff
 docs/             architecture · workflow · scoring · agents · direction language
 examples/         a fully worked episode, validated in CI
-adapters/         file-based interoperability notes for upstream tools
+adapters/         upstream file adapters, and image-prompt profiles per generator
 tests/            structure, prompt, schema, scoring, and worked-example tests
 ```
 

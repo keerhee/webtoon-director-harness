@@ -28,6 +28,9 @@ synthesizes, validates, and only then hands off.
 7. **continuity-supervisor** validates state and contradictions.
 8. Quality gate: below threshold or any hard fail → revise the affected panels and re-review.
 9. Export to `06_handoff/` and validate.
+10. **Stage 3 — panel render** (`panel-render` skill, on request only): build prompts, render
+   reference sheets, then panels with a validate-and-re-render loop, then letter. Local and
+   free (ComfyUI). Never start this automatically — it costs GPU hours; wait to be asked.
 
 ## Workspace contract
 ```
@@ -41,6 +44,8 @@ _workspace/<episode>/
   05_continuity/  continuity_state.yaml · continuity_report.yaml
   06_handoff/     direction_bible.md · panel_direction.yaml · continuity_state.yaml
                   critic_report.md · stage2_handoff.md
+  07_prompts/     image prompts, reference sheets, lettering spec (Stage 3)
+  08_panels/      rendered PNGs + validation.md (Stage 3)
 ```
 `_workspace/` is gitignored. Never write episode work outside it, and never edit an upstream stage's
 artifact in place — revise it and note the loop number.
@@ -70,6 +75,7 @@ python scripts/score_direction.py <critic.yaml>  # weighted score + PASS/REVISE
 python scripts/score_direction.py <critic.yaml> --gate breakdown   # Stage 0.5 gate
 python scripts/validate_artifacts.py _workspace/ep01
 python scripts/validate_handoff.py _workspace/ep01/06_handoff
+python scripts/build_image_prompts.py _workspace/ep01     # Stage 3 prompts
 pytest                                           # repo structure and scoring tests
 ```
 

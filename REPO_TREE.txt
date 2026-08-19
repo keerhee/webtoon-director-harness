@@ -8,6 +8,8 @@
     [F] emotion-director.md
     [F] narrative-director.md
     [F] pacing-director.md
+    [F] panel-validator.md
+    [F] prompt-smith.md
     [F] showrunner.md
   [D] skills
     [D] continuity-check
@@ -15,6 +17,8 @@
     [D] directors-room
       [F] SKILL.md
     [D] panel-direction
+      [F] SKILL.md
+    [D] panel-render
       [F] SKILL.md
     [D] quality-loop
       [F] SKILL.md
@@ -27,6 +31,9 @@
 [D] adapters
   [D] aitoon
     [F] README.md
+  [D] image-prompt
+    [D] profiles
+      [F] comfyui.yaml
 [D] config
   [F] direction_modes.yaml
   [F] direction_vocabulary.yaml
@@ -35,6 +42,7 @@
   [F] AGENTS.md
   [F] ARCHITECTURE.md
   [F] DIRECTION_LANGUAGE.md
+  [F] IMAGE_PIPELINE.md
   [F] SCORING.md
   [F] WORKFLOW.md
 [D] examples
@@ -76,11 +84,31 @@
       [F] direction_bible.md
       [F] panel_direction.yaml
       [F] stage2_handoff.md
+    [D] 07_prompts
+      [D] panels
+        [F] P01.txt
+        [F] P02.txt
+        [F] P03.txt
+        [F] P04.txt
+        [F] P05a.txt
+        [F] P05b.txt
+        [F] P06.txt
+        [F] P07.txt
+      [D] refs
+        [F] REFERENCE_SHEETS.md
+      [F] characters.md
+      [F] lettering.md
+      [F] locations.md
+      [F] manifest.json
+      [F] negative.txt
+      [F] README.md
+      [F] style_anchor.txt
 [D] harness
   [F] __init__.py
   [F] artifacts.py
   [F] cli.py
   [F] config.py
+  [F] prompts.py
   [F] scoring.py
 [D] schemas
   [F] beat_sheet.schema.yaml
@@ -90,6 +118,7 @@
   [F] panel_breakdown.schema.yaml
   [F] panel_direction.schema.yaml
 [D] scripts
+  [F] build_image_prompts.py
   [F] init_episode.py
   [F] score_direction.py
   [F] validate_artifacts.py
@@ -102,6 +131,7 @@
   [F] conftest.py
   [F] test_breakdown.py
   [F] test_example_episode.py
+  [F] test_image_prompts.py
   [F] test_prompts.py
   [F] test_schemas.py
   [F] test_scoring.py

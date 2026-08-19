@@ -1,0 +1,17 @@
+# P02
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), extreme close-up of an object, isolated object, no people visible, eye level camera, Latch plate dead center, frame symmetrical; the bolt is retracted, Her hand entering from frame right, not yet touching, Center-weighted — the reader sees the retracted bolt before her hand arrives, Door surface, sharp, A hairline of warm light through the gap, Corridor key from behind camera; the gap light is motivated by the room
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 448
+- generate at : 1344 x 768  (upscale x0.583)
+- seed        : 1190471697
+- characters  : mina
+- location    : LOC_LAB_B3

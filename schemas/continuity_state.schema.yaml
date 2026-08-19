@@ -18,6 +18,18 @@ properties:
           required: [id]
           properties:
             id: {type: string}
+            appearance:
+              type: string
+              description: "Immutable physical description - hair, eyes, build. Repeated in every image prompt."
+            marks:
+              type: array
+              description: "Identifying marks with their side. A mole that swaps cheeks reads as a different person."
+              items:
+                type: object
+                required: [mark]
+                properties:
+                  mark: {type: string}
+                  side: {type: string, enum: [left, right, center]}
             costume: {type: string}
             handedness: {type: string, enum: [left, right, unknown]}
             held_objects: {type: array, items: {type: string}}

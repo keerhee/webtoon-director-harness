@@ -1,0 +1,28 @@
+# P07
+
+## positive
+
+korean webtoon style, clean confident lineart, cel shading, soft gradient rendering, digital comic illustration, tense atmosphere, high contrast, restrained palette, muted desaturated palette, minimal ornament, highly detailed, sharp focus, professional comic art, mina_char, mina, late twenties, straight black hair tied back, tired dark eyes, slim build, Field jacket over lab shirt, ID lanyard tucked in, hair tied back, small mole under the eye on the left, holding tablet, LOC_LAB_B3 (Door on the south wall; workbench across the centre; cable rack on the east side; alcove in the north wall.), wide shot, full body in environment, environment readable, low angle, camera looking up, Very tall panel: darkness and converging cable runs for the first screen; the prototype arrives at the bottom, Mina a silhouette at the lower edge, Standing, arrested mid-step, dwarfed by the alcove, Cable runs converge on the core; the eye is delivered there and held, Cable rack, out of focus, framing without obstructing, The alcove's far wall, visible only where the pulse reaches it, The prototype is the only source; everything else is its shadow
+
+## negative
+
+text, speech bubble, speech balloon, caption, subtitles, letters, words, watermark, signature, logo, ui, extra fingers, fused fingers, deformed hands, extra limbs, malformed anatomy, extra heads, blurry, out of focus, lowres, jpeg artifacts, panel border, frame, comic page layout, multiple panels, collage, split screen, photorealistic, 3d render
+
+## generation
+
+- target size : 800 x 3328
+- generate at : 832 x 1280  (upscale x2.6)
+- seed        : 1569904314
+- characters  : mina
+- location    : LOC_LAB_B3
+
+## sections
+
+- 1/3 at 832x1280 - upper portion of the panel
+- 2/3 at 832x1280 - middle portion of the panel
+- 3/3 at 832x1280 - lower portion of the panel
+
+## notes
+
+- Tall panel (3328px): render 3 overlapping sections and stitch. Keep the payoff at the bottom - the scroll reveal is the beat.
+- Full-width panel: no side margin in the strip.
