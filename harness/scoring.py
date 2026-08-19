@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from harness.config import AXES, ConfigError, hard_fail_rules
+from harness.config import ConfigError, hard_fail_rules
 
 
 @dataclass
@@ -100,7 +100,7 @@ def evaluate(report: dict[str, Any], config: dict[str, Any]) -> ScoreResult:
     warnings: list[str] = []
     evidence_floor = config.get("evidence_required_at_or_above")
     if evidence_floor is not None:
-        for axis in AXES:
+        for axis in weights:
             if scores.get(axis, 0) >= float(evidence_floor) and not evidence.get(axis):
                 warnings.append(
                     f"{axis}: score {scores[axis]:g} requires panel-level evidence"

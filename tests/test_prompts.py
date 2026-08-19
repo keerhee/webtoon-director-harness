@@ -24,7 +24,7 @@ def _skill_files(repo_root):
 
 
 def test_agents_are_discovered(repo_root):
-    assert len(_agent_files(repo_root)) == 8
+    assert len(_agent_files(repo_root)) == 9
 
 
 def test_agent_frontmatter_is_valid(repo_root):

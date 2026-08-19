@@ -1,0 +1,49 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Panel Breakdown
+description: >
+  One Stage 0.5 candidate: a proposal for how a prose scene should be cut into panels.
+  Carries no staging - that is the direction stages' job. It decides only how many
+  panels there are, where the cuts fall, and what each panel is for.
+type: object
+required: [episode_id, approach, panels]
+additionalProperties: true
+properties:
+  episode_id: {type: string}
+  approach:
+    type: string
+    enum: [dense, economical, spacious]
+  scene_id: {type: string}
+  panel_count: {type: integer, minimum: 1}
+  rationale:
+    type: string
+    minLength: 20
+    description: "What this cut buys, and what it gives up."
+  panels:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [panel_id, content, weight]
+      additionalProperties: true
+      properties:
+        panel_id:
+          type: string
+          pattern: "^P[0-9]{2,3}[a-z]?$"
+        beat_ref:
+          type: string
+          description: "The beat_sheet beat this panel serves."
+        content:
+          type: string
+          minLength: 8
+          description: "What is in the panel, in plain language. No shot or angle."
+        weight:
+          type: string
+          enum: [information, reaction, transition, reveal, atmosphere]
+          description: "What the panel is for. A scene of pure information panels has no beats."
+        dialogue_source:
+          type: string
+          description: "Source dialogue assigned to this panel, unedited."
+        carries_reveal:
+          type: string
+          description: "The reveal this panel delivers, if any. One reveal per panel."
+        note: {type: string}

@@ -21,6 +21,7 @@ REQUIRED_HANDOFF_FILES = (
 #: Workspace stage directories, in pipeline order.
 STAGE_DIRS = (
     "00_input/layouts",
+    "00_input/breakdown",
     "01_analysis",
     "02_candidates",
     "03_reviews",
@@ -31,6 +32,7 @@ STAGE_DIRS = (
 
 #: Artifact filename -> schema filename.
 SCHEMA_MAP = {
+    "beat_sheet.yaml": "beat_sheet.schema.yaml",
     "narrative_analysis.yaml": "narrative_analysis.schema.yaml",
     "emotional.yaml": "panel_direction.schema.yaml",
     "cinematic.yaml": "panel_direction.schema.yaml",
@@ -63,8 +65,12 @@ def load_schema(name: str, root: Path | None = None) -> dict[str, Any]:
 
 def schema_for(path: Path) -> str | None:
     """Return the schema filename for an artifact, or None when it is unschema'd."""
-    if path.name.startswith("critic_") and path.suffix in {".yaml", ".yml"}:
-        return "critic_report.schema.yaml"
+    if path.suffix in {".yaml", ".yml"}:
+        if path.name.startswith("critic_"):
+            return "critic_report.schema.yaml"
+        # Stage 0.5 candidates are named by approach and live in a breakdown/ directory.
+        if path.parent.name == "breakdown":
+            return "panel_breakdown.schema.yaml"
     return SCHEMA_MAP.get(path.name)
 
 
@@ -155,8 +161,9 @@ def validate_artifact(path: Path, root: Path | None = None) -> list[Issue]:
         return []
     data = load_yaml(path)
     issues = validate_against_schema(data, load_schema(schema_name, root), path)
-    if schema_name == "panel_direction.schema.yaml":
+    if schema_name in {"panel_direction.schema.yaml", "panel_breakdown.schema.yaml"}:
         issues += check_panel_ids(data, path)
+    if schema_name == "panel_direction.schema.yaml":
         issues += check_vocabulary(data, path, root)
     return issues
 

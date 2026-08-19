@@ -59,6 +59,21 @@ read in passes, so design its top and bottom as separate moments.
 
 Every panel has exactly one. A panel that needs two is usually two panels.
 
+## `panel_weight` - Stage 0.5 only
+
+What a panel is *for*, decided before any staging exists.
+
+| Term | Meaning |
+|---|---|
+| `information` | Delivers a fact the reader needs. Necessary, and the cheapest kind of panel. |
+| `reaction` | Shows the effect of a fact on someone. Where feeling actually lives. |
+| `transition` | Moves between places, times, or subjects. Spend few of these. |
+| `reveal` | Delivers one - exactly one - new thing. Two reveals in a panel means neither lands. |
+| `atmosphere` | Carries mood or place with no plot movement. Powerful in threes, deadly in fives. |
+
+Beats in a beat sheet use `B01`, `B02` - never panel IDs, because panels do not exist yet and using
+panel IDs there pre-commits the cut the three candidates are supposed to disagree about.
+
 ## Composition devices
 
 `rule_of_thirds` · `centered_symmetry` · `negative_space_front` (anticipation) ·

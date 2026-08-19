@@ -1,0 +1,41 @@
+candidate: dense
+episode_id: sample_ep01
+loop: 0
+first_impression: "The reveals are handled correctly. The scene spends its first four panels on a woman opening a door."
+scores:
+  beat_coverage:
+    score: 9
+    evidence: "Every beat has a panel and B05 has two, so the beat sheet is fully realized with nothing smeared."
+  reveal_placement:
+    score: 9
+    evidence: "P08 and P09 separate the card from the recognition, preserving the reader-ahead-of-Mina offset; P03 and P07 each carry exactly one reveal."
+  rhythm_potential:
+    score: 7
+    evidence: "Eleven panels allow bursts and holds, but P01-P05 give the scene's three weakest beats five panels, which flattens the approach."
+  production_cost:
+    score: 4
+    evidence: "Eleven panels for one scene turn; P02 and P04 exist only as granularity."
+weighted_total: 7.75
+hard_failures: []
+strengths:
+  - {panel_id: P08, note: "Isolating the card before the recognition is the single most valuable cut decision available in this scene."}
+problems:
+  - panel_id: P02
+    severity: major
+    axis: production_cost
+    problem: "A hand reaching for a handle is granularity without a beat."
+    revision: "Merge into P03."
+    owner: breakdown-director
+  - panel_id: P04
+    severity: major
+    axis: rhythm_potential
+    problem: "Opening the door and crossing the threshold are two panels for one transit beat."
+    revision: "Merge P04 and P05."
+    owner: breakdown-director
+  - panel_id: P06
+    severity: minor
+    axis: production_cost
+    problem: "The hum gets an atmosphere panel before the pulse panel that would carry it anyway."
+    revision: "Fold the sound into P07 as an off-panel effect."
+    owner: breakdown-director
+verdict: revise

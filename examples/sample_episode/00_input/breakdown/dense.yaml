@@ -1,0 +1,62 @@
+episode_id: sample_ep01
+scene_id: S01
+approach: dense
+panel_count: 11
+rationale: >
+  Eleven panels: moment-to-moment through the approach and the recognition, so every physical
+  step of the discovery is its own frame. Buys granular tension and gives the reader time inside
+  each beat; gives up scroll economy, and spends four panels on B01-B03, which are the scene's
+  three weakest beats. The reveals are all separated, which is the cut's real strength.
+panels:
+  - panel_id: P01
+    beat_ref: B01
+    content: "Mina walks the corridor toward B3."
+    weight: information
+  - panel_id: P02
+    beat_ref: B01
+    content: "Her hand reaches for the handle."
+    weight: transition
+    note: "Granularity for its own sake - this is the panel a critic will cut first."
+  - panel_id: P03
+    beat_ref: B02
+    content: "The bolt is retracted."
+    weight: reveal
+    carries_reveal: "Someone has been here."
+  - panel_id: P04
+    beat_ref: B03
+    content: "She pushes the door open."
+    weight: transition
+  - panel_id: P05
+    beat_ref: B03
+    content: "She steps across the threshold into the dark."
+    weight: transition
+  - panel_id: P06
+    beat_ref: B04
+    content: "A low hum reaches her; she stops."
+    weight: atmosphere
+  - panel_id: P07
+    beat_ref: B04
+    content: "A blue pulse washes the dark."
+    weight: reveal
+    carries_reveal: "The room is not dead."
+  - panel_id: P08
+    beat_ref: B05
+    content: "An access card on the floor."
+    weight: reveal
+    carries_reveal: "A card is here."
+  - panel_id: P09
+    beat_ref: B05
+    content: "Mina recognizes the name on it."
+    weight: reaction
+    carries_reveal: "Jun was here."
+    dialogue_source: "준? 왜 준의 카드가 여기 있지?"
+  - panel_id: P10
+    beat_ref: B06
+    content: "She turns toward the back of the room."
+    weight: transition
+  - panel_id: P11
+    beat_ref: B07
+    content: "The prototype, active."
+    weight: reveal
+    carries_reveal: "The destruction was never real."
+    dialogue_source: "작동 중이야. 계속 작동하고 있었어."

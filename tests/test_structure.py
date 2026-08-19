@@ -8,6 +8,8 @@ REQUIRED_FILES = [
     "config/direction_modes.yaml",
     "config/direction_vocabulary.yaml",
     "schemas/panel_direction.schema.yaml",
+    "schemas/panel_breakdown.schema.yaml",
+    "schemas/beat_sheet.schema.yaml",
     "schemas/critic_report.schema.yaml",
     "schemas/narrative_analysis.schema.yaml",
     "schemas/continuity_state.schema.yaml",
@@ -31,6 +33,7 @@ REQUIRED_FILES = [
 
 REQUIRED_AGENTS = [
     "showrunner",
+    "breakdown-director",
     "narrative-director",
     "cinematography-director",
     "emotion-director",
@@ -40,7 +43,13 @@ REQUIRED_AGENTS = [
     "direction-critic",
 ]
 
-REQUIRED_SKILLS = ["directors-room", "panel-direction", "continuity-check", "quality-loop"]
+REQUIRED_SKILLS = [
+    "directors-room",
+    "story-breakdown",
+    "panel-direction",
+    "continuity-check",
+    "quality-loop",
+]
 
 
 @pytest.mark.parametrize("relative", REQUIRED_FILES)

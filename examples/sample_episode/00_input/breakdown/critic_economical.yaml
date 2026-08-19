@@ -1,0 +1,34 @@
+candidate: economical
+episode_id: sample_ep01
+loop: 0
+first_impression: "Fast and cheap, and it arrives at the reveal before I have any reason to care about it."
+scores:
+  beat_coverage:
+    score: 7
+    evidence: "Every beat is present, but B01 and B03 survive only as implication - the reader never sees the routine that the anomaly is supposed to break."
+  reveal_placement:
+    score: 4
+    evidence: "P04 delivers 'a card is here' and 'it is Jun's' in one frame, and P01 merges the approach with the unlocked door."
+  rhythm_potential:
+    score: 5
+    evidence: "Five panels leave no room for a hold: every panel must carry plot, so nothing can be spent on dread."
+  production_cost:
+    score: 10
+    evidence: "Five panels for a full scene turn - the cheapest cut on the table by a wide margin."
+weighted_total: 6.05
+hard_failures:
+  - {rule: reveal_collision, panel_id: P04, detail: "Two reveals share one panel; the reader cannot notice the card before Mina names it."}
+problems:
+  - panel_id: P04
+    severity: blocking
+    axis: reveal_placement
+    problem: "Collapsing the card and the recognition removes the scene's only chance at dramatic irony."
+    revision: "Split into two panels: the card alone, then the recognition."
+    owner: breakdown-director
+  - panel_id: P05
+    severity: major
+    axis: rhythm_potential
+    problem: "The climax shares its frame with the reaction and the line, so nothing has room to land."
+    revision: "Give the prototype a panel with nothing competing in it."
+    owner: breakdown-director
+verdict: revise

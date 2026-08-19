@@ -7,7 +7,7 @@ from typing import Any
 
 import yaml
 
-#: The six scoring axes, in report order.
+#: The six direction scoring axes, in report order.
 AXES = (
     "narrative_clarity",
     "emotional_impact",
@@ -15,6 +15,14 @@ AXES = (
     "pacing_scroll",
     "reading_flow",
     "continuity",
+)
+
+#: The four Stage 0.5 panel-breakdown axes, in report order.
+BREAKDOWN_AXES = (
+    "beat_coverage",
+    "reveal_placement",
+    "rhythm_potential",
+    "production_cost",
 )
 
 _MARKER = Path("config") / "quality_gate.yaml"
@@ -51,32 +59,52 @@ def load_yaml(path: Path) -> Any:
         raise ConfigError(f"Invalid YAML in {path}: {exc}") from exc
 
 
+def _validate_gate(config: dict[str, Any], axes: tuple[str, ...], label: str) -> dict[str, Any]:
+    """Shared validation for any gate: complete, known, normalized weights."""
+    weights = config.get("weights") or {}
+    missing = set(axes) - set(weights)
+    unknown = set(weights) - set(axes)
+    if missing:
+        raise ConfigError(f"{label} is missing weights for: {sorted(missing)}")
+    if unknown:
+        raise ConfigError(f"{label} has unknown axes: {sorted(unknown)}")
+
+    total = sum(float(v) for v in weights.values())
+    if abs(total - 1.0) > 1e-6:
+        raise ConfigError(f"{label} weights must sum to 1.0, got {total:.4f}")
+
+    threshold = float(config.get("threshold", 0))
+    if not 0 <= threshold <= 10:
+        raise ConfigError(f"{label} threshold must be within 0-10, got {threshold}")
+    return config
+
+
 def load_quality_gate(root: Path | None = None) -> dict[str, Any]:
-    """Load and validate `config/quality_gate.yaml`.
+    """Load and validate the direction gate from `config/quality_gate.yaml`.
 
     Validation is deliberate: a gate whose weights do not sum to 1.0 silently
     rescales every score, which is worse than failing loudly.
     """
     root = root or find_repo_root()
     config = load_yaml(root / "config" / "quality_gate.yaml")
+    return _validate_gate(config, AXES, "quality_gate.yaml")
 
-    weights = config.get("weights") or {}
-    missing = set(AXES) - set(weights)
-    unknown = set(weights) - set(AXES)
-    if missing:
-        raise ConfigError(f"quality_gate.yaml is missing weights for: {sorted(missing)}")
-    if unknown:
-        raise ConfigError(f"quality_gate.yaml has unknown axes: {sorted(unknown)}")
 
-    total = sum(float(v) for v in weights.values())
-    if abs(total - 1.0) > 1e-6:
-        raise ConfigError(f"Weights must sum to 1.0, got {total:.4f}")
+def load_breakdown_gate(root: Path | None = None) -> dict[str, Any]:
+    """Load and validate the Stage 0.5 panel-breakdown gate.
 
-    threshold = float(config.get("threshold", 0))
-    if not 0 <= threshold <= 10:
-        raise ConfigError(f"threshold must be within 0-10, got {threshold}")
-
-    return config
+    It lives inside `quality_gate.yaml` under `breakdown_gate` so that both gates
+    are reviewed in one place, but it is a separate gate with its own axes,
+    threshold, and hard-fail rules.
+    """
+    root = root or find_repo_root()
+    config = load_yaml(root / "config" / "quality_gate.yaml")
+    gate = config.get("breakdown_gate")
+    if not gate:
+        raise ConfigError("quality_gate.yaml has no 'breakdown_gate' section")
+    gate = dict(gate)
+    gate.setdefault("evidence_required_at_or_above", config.get("evidence_required_at_or_above"))
+    return _validate_gate(gate, BREAKDOWN_AXES, "breakdown_gate")
 
 
 def hard_fail_rules(config: dict[str, Any]) -> list[str]:

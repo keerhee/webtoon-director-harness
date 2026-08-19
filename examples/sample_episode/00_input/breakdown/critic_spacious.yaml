@@ -1,0 +1,30 @@
+candidate: spacious
+episode_id: sample_ep01
+loop: 0
+first_impression: "Seven panels that know which three beats matter. P06 is the one I would argue about."
+scores:
+  beat_coverage:
+    score: 9
+    evidence: "All seven beats have a panel, and the budget is allocated by beat weight rather than evenly - B01 and B03 get one panel each, B05 is marked for a split."
+  reveal_placement:
+    score: 9
+    evidence: "P02, P04, P05, and P07 each carry exactly one reveal, in the beat sheet's order, and the P05 split keeps the reader one beat ahead of Mina."
+  rhythm_potential:
+    score: 8
+    evidence: "Compressing P01-P03 leaves budget for a hold at P04 and an uncontested climax at P07; P06 provides compression before the release."
+  production_cost:
+    score: 8
+    evidence: "Seven panels for a full scene turn, two of them functional - proportionate for a scene that carries an episode's central reveal."
+weighted_total: 8.60
+hard_failures: []
+strengths:
+  - {panel_id: P05, note: "Marking the split rather than performing it hands the direction stages a decision instead of a fait accompli."}
+  - {panel_id: P07, note: "The climax gets a panel with nothing competing in it."}
+problems:
+  - panel_id: P06
+    severity: minor
+    axis: production_cost
+    problem: "A transit panel that carries no information; it survives only on the argument that compression before a climax is worth a frame."
+    revision: "Keep, but flag to the pacing stage: if the episode runs long, this is the first panel to fold into P07."
+    owner: pacing-director
+verdict: pass

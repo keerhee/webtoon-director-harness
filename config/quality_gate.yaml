@@ -1,7 +1,7 @@
 # Quality gate. Weights must sum to 1.0 (enforced by tests and by score_direction.py).
 threshold: 8.5
 max_revision_loops: 3
-min_improvement_per_loop: 0.2   # below this, the problem is upstream — revisit the analysis
+min_improvement_per_loop: 0.2   # below this, the problem is upstream - revisit the analysis
 
 weights:
   narrative_clarity: 0.20
@@ -35,3 +35,27 @@ severity_policy:
   blocking: hard_fail
   major: "cap continuity axis at 6"
   minor: "note only"
+
+# ---------------------------------------------------------------------------
+# Stage 0.5 - panel breakdown. Runs only when the input arrives as prose,
+# i.e. before panel IDs exist. Four axes, its own lower threshold: a breakdown
+# is a structural decision, and over-tuning it starves the direction stages.
+# ---------------------------------------------------------------------------
+breakdown_gate:
+  threshold: 8.0
+  max_revision_loops: 1
+  weights:
+    beat_coverage: 0.30      # every beat in the sheet has a panel; no beat is smeared across many
+    reveal_placement: 0.30   # each reveal lands on its own panel, in the intended order
+    rhythm_potential: 0.25   # the panel count leaves room for holds, bursts, and one climax
+    production_cost: 0.15    # panel count is proportionate to what the scene is worth
+  hard_fail_rules:
+    beat_without_panel:
+      description: "A beat in the beat sheet has no panel carrying it."
+      detected_by: direction-critic
+    reveal_collision:
+      description: "Two reveals share one panel, so neither gets a beat."
+      detected_by: direction-critic
+    no_climax_panel:
+      description: "No single panel can carry the scene's climactic image."
+      detected_by: direction-critic

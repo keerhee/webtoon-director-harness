@@ -15,8 +15,10 @@ properties:
     description: "Recorded before panel-by-panel analysis. The only fresh read anyone gets."
   scores:
     type: object
-    minProperties: 6
-    description: "One entry per axis. Either a bare number or {score, evidence}."
+    minProperties: 4
+    description: >
+      One entry per axis of the gate being applied - six for direction reviews,
+      four for Stage 0.5 breakdown reviews. Either a bare number or {score, evidence}.
     additionalProperties:
       oneOf:
         - {type: number, minimum: 0, maximum: 10}
@@ -39,7 +41,8 @@ properties:
             rule:
               type: string
               enum: [broken_scene_continuity, unreadable_dialogue_order,
-                     character_identity_mismatch, missing_climax_or_reveal]
+                     character_identity_mismatch, missing_climax_or_reveal,
+                     beat_without_panel, reveal_collision, no_climax_panel]
             panel_id: {type: string}
             detail: {type: string}
   strengths:
@@ -63,7 +66,8 @@ properties:
         axis:
           type: string
           enum: [narrative_clarity, emotional_impact, visual_composition,
-                 pacing_scroll, reading_flow, continuity]
+                 pacing_scroll, reading_flow, continuity,
+                 beat_coverage, reveal_placement, rhythm_potential, production_cost]
         problem: {type: string}
         revision:
           type: string

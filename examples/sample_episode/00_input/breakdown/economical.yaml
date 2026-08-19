@@ -1,0 +1,39 @@
+episode_id: sample_ep01
+scene_id: S01
+approach: economical
+panel_count: 5
+rationale: >
+  Five panels: the fewest that still land every beat. Transit and setup are merged into the
+  panels that follow them, and the card reveal is delivered in a single frame. Buys speed and
+  a scene that costs almost nothing to draw; gives up the reader's chance to notice the card
+  before Mina does, and leaves the climax sharing its panel with her reaction.
+panels:
+  - panel_id: P01
+    beat_ref: B01
+    content: "Mina reaches the door of lab B3 and finds the bolt already retracted."
+    weight: information
+    carries_reveal: "Someone has been here."
+    note: "B01 and B02 merged - the walk is implied by the arrival."
+  - panel_id: P02
+    beat_ref: B03
+    content: "She steps into the dark lab."
+    weight: transition
+  - panel_id: P03
+    beat_ref: B04
+    content: "A blue pulse in the dark, and a low hum."
+    weight: reveal
+    carries_reveal: "The room is not dead."
+  - panel_id: P04
+    beat_ref: B05
+    content: "Jun's access card on the floor; Mina recognizes it."
+    weight: reveal
+    carries_reveal: "Jun was here."
+    dialogue_source: "준? 왜 준의 카드가 여기 있지?"
+    note: "Both facts - a card exists, and whose it is - land in one frame."
+  - panel_id: P05
+    beat_ref: B07
+    content: "The prototype, active, with Mina in front of it."
+    weight: reveal
+    carries_reveal: "The destruction was never real."
+    dialogue_source: "작동 중이야. 계속 작동하고 있었어."
+    note: "B06 merged in as the panel's entry."

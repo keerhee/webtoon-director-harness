@@ -3,6 +3,7 @@
 
     python scripts/score_direction.py _workspace/ep01/03_reviews/critic_cinematic.yaml
     python scripts/score_direction.py _workspace/ep01/03_reviews/critic_*.yaml --json
+    python scripts/score_direction.py _workspace/ep01/00_input/breakdown/critic_*.yaml --gate breakdown
 
 Exit code is 0 when every report passes, 1 when any report needs revision.
 """
@@ -19,14 +20,19 @@ if hasattr(sys.stdout, "reconfigure"):  # keep output readable on legacy console
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 
-from harness.config import AXES, ConfigError, load_quality_gate, load_yaml  # noqa: E402
+from harness.config import (  # noqa: E402
+    ConfigError,
+    load_breakdown_gate,
+    load_quality_gate,
+    load_yaml,
+)
 from harness.scoring import evaluate  # noqa: E402
 
 
-def _render(result, path: Path) -> None:
+def _render(result, path: Path, axes) -> None:
     print(f"\n{path.name}  -  candidate: {result.candidate}")
     print("-" * 60)
-    for axis in AXES:
+    for axis in axes:
         score = result.scores.get(axis)
         if score is None:
             continue
@@ -48,10 +54,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("reports", nargs="+", type=Path, help="critic report YAML files")
     parser.add_argument("--json", action="store_true", help="emit machine-readable output")
     parser.add_argument("--quiet", action="store_true", help="print only the verdict line")
+    parser.add_argument(
+        "--gate",
+        choices=["direction", "breakdown"],
+        default="direction",
+        help="which gate to score against (default: direction; breakdown = Stage 0.5)",
+    )
     args = parser.parse_args(argv)
 
     try:
-        config = load_quality_gate()
+        config = load_breakdown_gate() if args.gate == "breakdown" else load_quality_gate()
     except ConfigError as exc:
         print(f"Config error: {exc}", file=sys.stderr)
         return 2
@@ -71,8 +83,9 @@ def main(argv: list[str] | None = None) -> int:
         for path, result in results:
             print(f"{result.weighted_total:.2f} {result.verdict} {path.name}")
     else:
+        axes = list(config["weights"])
         for path, result in results:
-            _render(result, path)
+            _render(result, path, axes)
         if len(results) > 1:
             best = max(results, key=lambda item: item[1].weighted_total)
             print(f"\nHighest scoring candidate: {best[1].candidate} ({best[1].weighted_total:.2f})")

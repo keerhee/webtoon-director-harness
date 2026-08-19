@@ -1,5 +1,6 @@
 [D] .claude
   [D] agents
+    [F] breakdown-director.md
     [F] cinematography-director.md
     [F] continuity-supervisor.md
     [F] dialogue-silence-editor.md
@@ -16,6 +17,8 @@
     [D] panel-direction
       [F] SKILL.md
     [D] quality-loop
+      [F] SKILL.md
+    [D] story-breakdown
       [F] SKILL.md
   [F] CLAUDE.md
 [D] .github
@@ -37,6 +40,15 @@
 [D] examples
   [D] sample_episode
     [D] 00_input
+      [D] breakdown
+        [F] critic_dense.yaml
+        [F] critic_economical.yaml
+        [F] critic_spacious.yaml
+        [F] dense.yaml
+        [F] economical.yaml
+        [F] selection.md
+        [F] spacious.yaml
+      [F] beat_sheet.yaml
       [F] normalized_input.yaml
       [F] source_handoff.md
     [D] 01_analysis
@@ -71,9 +83,11 @@
   [F] config.py
   [F] scoring.py
 [D] schemas
+  [F] beat_sheet.schema.yaml
   [F] continuity_state.schema.yaml
   [F] critic_report.schema.yaml
   [F] narrative_analysis.schema.yaml
+  [F] panel_breakdown.schema.yaml
   [F] panel_direction.schema.yaml
 [D] scripts
   [F] init_episode.py
@@ -86,6 +100,7 @@
   [F] stage2_handoff.md
 [D] tests
   [F] conftest.py
+  [F] test_breakdown.py
   [F] test_example_episode.py
   [F] test_prompts.py
   [F] test_schemas.py

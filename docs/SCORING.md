@@ -70,6 +70,38 @@ report that disagrees with the computed value by more than 0.05.
   upstream: the scene goal, the reveal order, or the choice of spine.
 - **A perfect score means the rubric ran out of resolution,** not that the scene cannot be better.
 
+## The Stage 0.5 gate
+
+Panel breakdown is scored separately, on four structural axes with a lower threshold (8.0) and a
+single revision loop.
+
+| Axis | Weight | The question it asks |
+|---|---:|---|
+| Beat coverage | 30% | Does every beat have a panel? Is any beat smeared across so many panels it loses shape? |
+| Reveal placement | 30% | Does each reveal get its own panel, in the intended order? |
+| Rhythm potential | 25% | Does the cut leave room for holds, bursts, and one uncontested climax panel? |
+| Production cost | 15% | Is the panel count proportionate to what the scene is worth? |
+
+Hard failures: `beat_without_panel`, `reveal_collision`, `no_climax_panel`.
+
+```bash
+python scripts/score_direction.py <critic.yaml> --gate breakdown
+```
+
+The threshold is lower on purpose. A breakdown does not need to be beautiful - it needs to leave
+every later stage room to work, and revision budget spent here is budget the direction stages lose.
+
+From `examples/sample_episode/00_input/breakdown/`:
+
+| Cut | Panels | Coverage | Reveals | Rhythm | Cost | Weighted | Verdict |
+|---|---:|---:|---:|---:|---:|---:|---|
+| dense | 11 | 9 | 9 | 7 | 4 | **7.75** | revise |
+| economical | 5 | 7 | 4 | 5 | 10 | **6.05** | revise - `reveal_collision` |
+| spacious | 7 | 9 | 9 | 8 | 8 | **8.60** | pass |
+
+`economical` scores highest on cost and still loses, which is the gate working: merging the card
+with its recognition destroys a beat no downstream staging can recover.
+
 ## Worked numbers
 
 From `examples/sample_episode/`:

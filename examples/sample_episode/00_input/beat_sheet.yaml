@@ -1,0 +1,55 @@
+episode_id: sample_ep01
+scene_id: S01
+scene_goal: "Mina learns the prototype she certified as destroyed is running, and that someone she trusts was here first."
+
+beats:
+  - id: B01
+    content: "Mina walks down to lab B3 for a routine seal check."
+    function: setup
+    weight: minor
+    note: "The world before anything is wrong. Cheap to render, cheap to cut."
+  - id: B02
+    content: "The door that should be locked is already unlocked."
+    function: escalate
+    reveals: "Someone has been here."
+    to: both
+    weight: normal
+  - id: B03
+    content: "She goes in anyway, into a room with no lights on."
+    function: escalate
+    weight: normal
+    note: "Character decision. The scene depends on the reader accepting she enters."
+  - id: B04
+    content: "Something in the dark has power: a blue pulse, and a low hum."
+    function: escalate
+    reveals: "The room is not dead."
+    to: both
+    weight: major
+  - id: B05
+    content: "An access card is lying on the floor. It is Jun's."
+    function: reveal
+    reveals: "Jun was here."
+    to: both
+    weight: major
+    note: "Two facts in one beat - a card exists, and whose it is. The cut decides whether they separate."
+  - id: B06
+    content: "She looks toward the back of the room."
+    function: transition
+    weight: minor
+  - id: B07
+    content: "The prototype is active."
+    function: payoff
+    reveals: "The destruction was never real."
+    to: both
+    weight: major
+
+climactic_moment: "The certified-destroyed prototype, powered, as the only light source in the room, with Mina dwarfed in front of it."
+
+dialogue:
+  - {beat_ref: B05, speaker: Mina, text: "준? 왜 준의 카드가 여기 있지?"}
+  - {beat_ref: B07, speaker: Mina, text: "작동 중이야. 계속 작동하고 있었어."}
+
+notes:
+  - "B05 is the only beat where the reader can be put one step ahead of the character. Whether that offset survives is a property of the cut, not of the staging."
+  - "B01, B03, and B06 are functional. They are the first candidates for merging when panel budget is tight."
+  - "Source dialogue is carried unedited; the dialogue pass compresses it much later."

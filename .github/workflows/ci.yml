@@ -54,6 +54,12 @@ jobs:
           python scripts/score_direction.py examples/sample_episode/03_reviews/critic_*.yaml --quiet || true
           python scripts/score_direction.py examples/sample_episode/03_reviews/critic_synthesis.yaml
 
+      - name: Score the example Stage 0.5 breakdown
+        # dense and economical are expected to fail; the selected cut must pass.
+        run: |
+          python scripts/score_direction.py examples/sample_episode/00_input/breakdown/critic_*.yaml --gate breakdown --quiet || true
+          python scripts/score_direction.py examples/sample_episode/00_input/breakdown/critic_spacious.yaml --gate breakdown
+
       - name: Smoke-test episode init
         run: |
           python scripts/init_episode.py ci_demo --from-example

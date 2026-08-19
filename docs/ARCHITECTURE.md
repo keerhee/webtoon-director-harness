@@ -21,6 +21,12 @@ different agents that communicate only through files.
                     │   Intake &       │
                     │   Normalize      │
                     └────────┬─────────┘
+                             │  does the input have panels?
+                    ┌────────▼─────────┐
+                    │   Stage 0.5      │  no  → beat sheet, three cuts,
+                    │ Panel Breakdown  │        review, select, freeze IDs
+                    │  (conditional)   │  yes → skip; the cut was made upstream
+                    └────────┬─────────┘
                              │  normalized_input.yaml
                     ┌────────▼─────────┐
                     │    Narrative     │  scene goal · reveal order
@@ -65,7 +71,8 @@ different agents that communicate only through files.
 | Pattern | Where | Why |
 |---|---|---|
 | **Supervisor** | Showrunner | One agent owns tradeoffs; without it, specialists deadlock or average. |
-| **Fan-out / fan-in** | Three candidates | Alternatives must exist before a choice can be meaningful. |
+| **Fan-out / fan-in** | Three cuts, then three directions | Alternatives must exist before a choice can be meaningful — and that applies to the cut as much as to the staging. |
+| **Conditional stage** | Stage 0.5 | Prose inputs need a cut; storyboard inputs already have one. The pipeline detects which it received instead of asking. |
 | **Expert pool** | Specialist directors | Each concern gets an advocate that will not silently drop it. |
 | **Generator / reviewer** | Critic vs. authors | Self-review grades effort. Independence is what makes the score mean anything. |
 | **Bounded loop** | Quality gate | Revision without a bound is how a pipeline spends a day polishing panel four. |
@@ -84,6 +91,8 @@ and late ones dominate. Files give you:
 
 ## Deliberate non-goals
 
+- **Not a script writer.** Stage 0.5 cuts an existing scene into panels. It never invents story,
+  and it never names a shot.
 - **Not an image generator.** Handoff files name no model, tool, or studio pipeline.
 - **Not a script editor.** The dialogue pass serves direction; it does not rewrite the story.
 - **Not automatic taste.** The gate catches competent-but-unremarkable work and stops runaway

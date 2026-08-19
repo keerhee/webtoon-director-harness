@@ -12,6 +12,13 @@ synthesizes, validates, and only then hands off.
 
 ## Mandatory workflow
 1. Read `_workspace/<episode>/00_input/`; normalize to `normalized_input.yaml` if absent.
+   **Check for panels.** If `normalized_input.yaml` has no `panels[]`, or a scene carries one or two
+   lumped descriptions instead of panel-level ones, run **Stage 0.5** (step 1.5) first. If the input
+   already arrives as a cut storyboard, skip it — the cut was made upstream. State which branch you took.
+1.5. **Stage 0.5 — panel breakdown** (`story-breakdown` skill, conditional): beat sheet →
+   three candidate cuts (dense / economical / spacious) → independent review against `breakdown_gate`
+   → selection → `panels[]` written into `normalized_input.yaml`. Panel IDs are frozen at the end
+   of this step.
 2. **narrative-director** → scene objective, reader emotion arc, reveal order, climax, hook.
 3. Fan out **three genuinely different candidates** — Emotional, Cinematic, Webtoon-native —
    generated independently, without seeing each other.
@@ -26,6 +33,7 @@ synthesizes, validates, and only then hands off.
 ```
 _workspace/<episode>/
   00_input/       normalized_input.yaml, source_handoff.md, layouts/
+                  beat_sheet.yaml, breakdown/ (Stage 0.5 only)
   01_analysis/    narrative_analysis.yaml
   02_candidates/  emotional.yaml · cinematic.yaml · webtoon_native.yaml
   03_reviews/     critic_<candidate>.yaml · quality_gate_result.yaml
@@ -38,7 +46,7 @@ _workspace/<episode>/
 artifact in place — revise it and note the loop number.
 
 ## Conventions
-- **Panel IDs** are stable and never renumbered. Split a panel as `P05a`, `P05b`; a merge keeps the
+- **Panel IDs** are assigned once — upstream, or by Stage 0.5 — and never renumbered. Split a panel as `P05a`, `P05b`; a merge keeps the
   lower ID and records the merge in the decision log.
 - **Controlled vocabulary** for shot, angle, transition, and beat duration lives in
   `config/direction_vocabulary.yaml`. Do not invent terms when a listed one fits.
@@ -59,6 +67,7 @@ artifact in place — revise it and note the loop number.
 ```bash
 python scripts/init_episode.py ep01              # create the workspace skeleton
 python scripts/score_direction.py <critic.yaml>  # weighted score + PASS/REVISE
+python scripts/score_direction.py <critic.yaml> --gate breakdown   # Stage 0.5 gate
 python scripts/validate_artifacts.py _workspace/ep01
 python scripts/validate_handoff.py _workspace/ep01/06_handoff
 pytest                                           # repo structure and scoring tests

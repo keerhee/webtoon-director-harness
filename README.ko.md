@@ -29,10 +29,15 @@
 ## 워크플로
 
 ```text
-상위 콘티 / Stage 1
+상위 스토리 · 대본 · 콘티 / Stage 1
         │
         ▼
-  입력 정규화 ──▶ 내러티브 분석
+  입력 정규화
+        │
+        ├── 컷이 없으면 ──▶ Stage 0.5  컷 분할              ← 조건부 자동
+        │                   비트 시트 ▸ 3개 분할안 ▸ 리뷰 ▸ 선택 ▸ ID 확정
+        ▼
+  내러티브 분석
                         │
         ┌───────────────┼───────────────┐
    Emotional        Cinematic      Webtoon-native      ← 독립 팬아웃
@@ -57,6 +62,7 @@
 | 에이전트 | 담당 |
 |---|---|
 | **Showrunner** | 최종 창작 결정권, 이해충돌 조정, 종합 |
+| **Breakdown Director** | 컷 수와 컷을 나누는 지점 — Stage 0.5, 산문 입력일 때만 |
 | **Narrative Director** | 장면 목표, 드라마틱 비트, 리빌 순서, 훅 |
 | **Cinematography Director** | 샷·앵글·구도·깊이·조명·시각적 리빌 |
 | **Emotion Director** | 감정 비트, 리액션, 침묵, 기대감 |
@@ -92,6 +98,21 @@ quality gate를 통과할 때까지 수정한 후 06_handoff에 최종 산출물
 python scripts/init_episode.py demo --from-example
 ```
 
+## 입력: 스토리인가, 콘티인가
+
+둘 다 됩니다. 어느 쪽을 받았는지는 하네스가 직접 판별합니다.
+
+| 가진 것 | 동작 |
+|---|---|
+| **컷이 나뉜 콘티** (컷별 설명이 있음) | Stage 0.5를 건너뜁니다 — 컷 분할은 상위에서 이미 내려진 결정이므로 다시 뒤집지 않습니다 |
+| **산문** (장면, 시놉시스, 대본) | Stage 0.5 실행: 비트 시트 → 3개 분할안(`dense` / `economical` / `spacious`) → 4축 게이트로 독립 채점 → 선택·이식 → `panels[]`로 확정 |
+
+**요구하실 필요가 없습니다.** 판별은 입력 단계에서 자동으로 이루어지고, 어느 쪽으로 갔는지
+하네스가 보고합니다.
+
+그림·레이아웃·썸네일은 어느 수준에서도 **필요 없습니다**. `layout_files`는 선택 항목이며,
+워크드 예제도 이 값을 비운 채 완주합니다.
+
 ## 워크드 예제
 
 [`examples/sample_episode/`](examples/sample_episode)는 7컷 장면에 대한 **전 단계 완주 기록**입니다.
@@ -105,6 +126,7 @@ python scripts/init_episode.py demo --from-example
 ```text
 _workspace/<episode>/
   00_input/       normalized_input.yaml, source_handoff.md, layouts/
+                  beat_sheet.yaml, breakdown/   (Stage 0.5 전용)
   01_analysis/    narrative_analysis.yaml
   02_candidates/  emotional.yaml · cinematic.yaml · webtoon_native.yaml
   03_reviews/     critic_<candidate>.yaml · quality_gate_result.yaml
@@ -135,10 +157,39 @@ _workspace/<episode>/
 
 ```bash
 python scripts/score_direction.py _workspace/ep01/03_reviews/critic_*.yaml
+python scripts/score_direction.py _workspace/ep01/00_input/breakdown/critic_*.yaml --gate breakdown
 python scripts/validate_artifacts.py _workspace/ep01     # 스키마 + 어휘 + 패널 ID
 python scripts/validate_handoff.py _workspace/ep01/06_handoff
 pytest
 ```
+
+### Stage 0.5 게이트 (컷 분할)
+
+컷 분할은 **별도의 4축 게이트**로 채점합니다. 통과 기준 8.0, 수정 루프 1회.
+
+| 축 | 가중치 | 묻는 것 |
+|---|---:|---|
+| beat_coverage | 30% | 모든 비트에 컷이 배정됐는가? 한 비트가 너무 많은 컷에 퍼져 형태를 잃지 않았는가? |
+| reveal_placement | 30% | 각 리빌이 자기 컷을 갖고, 의도한 순서로 도착하는가? |
+| rhythm_potential | 25% | 홀드·버스트·단독 클라이맥스 컷이 들어갈 여지가 남는가? |
+| production_cost | 15% | 컷 수가 이 장면의 값어치에 비례하는가? |
+
+하드페일: `beat_without_panel`, `reveal_collision`, `no_climax_panel`.
+
+기준이 낮은 것은 의도된 설계입니다. 분할안은 아름다울 필요가 없고, **뒤 단계가 작업할 여지를
+남기기만 하면 됩니다.** 여기서 쓴 수정 예산은 연출 단계가 잃는 예산입니다.
+
+예제의 실제 분할 점수:
+
+| 분할안 | 컷 수 | coverage | reveals | rhythm | cost | 가중 총점 | 판정 |
+|---|---:|---:|---:|---:|---:|---:|---|
+| dense | 11 | 9 | 9 | 7 | 4 | **7.75** | revise |
+| economical | 5 | 7 | 4 | 5 | 10 | **6.05** | revise — `reveal_collision` |
+| spacious | 7 | 9 | 9 | 8 | 8 | **8.60** | pass |
+
+`economical`은 비용 축에서 만점을 받고도 탈락합니다. 카드의 존재와 그것이 준의 것이라는 인지를
+한 컷에 합치면, **어떤 연출로도 복구할 수 없는 비트가 사라지기 때문**입니다. 게이트가 제 일을
+한 사례입니다.
 
 ### 예제의 실제 점수
 
@@ -172,7 +223,7 @@ pytest
 ## 저장소 구조
 
 ```text
-.claude/          에이전트 8종 + 스킬 4종 + 프로젝트 지침 (창작 코어)
+.claude/          에이전트 9종 + 스킬 5종 + 프로젝트 지침 (창작 코어)
 harness/          채점·설정 로딩·아티팩트 검증 (결정론적 코어)
 config/           품질 게이트, 연출 모드, 통제 어휘
 schemas/          모든 구조화 산출물의 JSON Schema

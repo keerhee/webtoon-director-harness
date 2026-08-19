@@ -7,7 +7,9 @@ that the quality gate is reproducible and testable rather than a matter of opini
 
 from harness.config import (
     AXES,
+    BREAKDOWN_AXES,
     find_repo_root,
+    load_breakdown_gate,
     load_direction_modes,
     load_quality_gate,
     load_vocabulary,
@@ -18,6 +20,8 @@ __version__ = "0.2.0"
 
 __all__ = [
     "AXES",
+    "BREAKDOWN_AXES",
+    "load_breakdown_gate",
     "ScoreResult",
     "evaluate",
     "find_repo_root",

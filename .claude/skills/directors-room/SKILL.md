@@ -13,6 +13,13 @@ purpose of the harness.
   write it before continuing. Never carry unnormalized input into the pipeline.
 - Confirm the panel IDs are stable and sequential (`P01`, `P02`, …). All later artifacts key on them.
 
+**If there are no panels**, the input is prose and the cut has not been made. Run the
+`story-breakdown` skill (Stage 0.5) before step 1: beat sheet → three candidate cuts → independent
+review against `breakdown_gate` → selection → `panels[]` committed to `normalized_input.yaml`.
+Same test applies to a scene carrying one or two lumped descriptions instead of panel-level ones.
+If the input already arrives as a cut storyboard, skip Stage 0.5 — the decision was made upstream
+and is not yours to redo. Say which branch you took.
+
 ## 1. Narrative analysis
 Invoke **narrative-director** → `01_analysis/narrative_analysis.yaml`.
 Gate: the file must name a single `climax_panel` and a one-sentence `scene_goal`.

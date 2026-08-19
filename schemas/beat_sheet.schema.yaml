@@ -1,0 +1,59 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Beat Sheet
+description: >
+  The prose-level read that precedes panel breakdown. Deliberately carries no panel
+  IDs - it exists so that the breakdown has something to be measured against, and so
+  the scene's shape is decided before its panel count is.
+type: object
+required: [episode_id, scene_goal, beats]
+additionalProperties: true
+properties:
+  episode_id: {type: string}
+  scene_id: {type: string}
+  scene_goal:
+    type: string
+    minLength: 10
+    description: "One sentence: what must change by the end of the scene."
+  beats:
+    type: array
+    minItems: 2
+    items:
+      type: object
+      required: [id, content, function]
+      properties:
+        id:
+          type: string
+          pattern: "^B[0-9]{2}$"
+          description: "Beat IDs are B01, B02 - never P01. Panels do not exist yet."
+        content: {type: string, minLength: 8}
+        function:
+          type: string
+          enum: [setup, escalate, reveal, react, transition, payoff]
+        reveals:
+          type: string
+          description: "What the reader or a character learns here, if anything."
+        to:
+          type: string
+          description: "reader | a character name | both"
+        weight:
+          type: string
+          enum: [minor, normal, major]
+          description: "How much panel budget this beat deserves."
+  climactic_moment:
+    type: string
+    minLength: 10
+    description: "Described in words, not as a panel ID - the breakdown decides which panel carries it."
+  dialogue:
+    type: array
+    items:
+      type: object
+      required: [beat_ref, text]
+      properties:
+        beat_ref: {type: string}
+        speaker: {type: string}
+        text:
+          type: string
+          description: "Source wording, unedited. The dialogue pass edits it much later."
+  notes:
+    type: array
+    items: {type: string}

@@ -1,0 +1,49 @@
+episode_id: sample_ep01
+scene_id: S01
+approach: spacious
+panel_count: 7
+rationale: >
+  Seven panels, spent unevenly. B01-B03 are compressed to one panel each because they are
+  functional, and the budget saved is put into B05, which splits so the reader can read the name
+  one beat before Mina does. Buys the scene's only moment of dramatic irony and leaves the climax
+  a panel of its own; gives up the granular approach tension the dense cut has, and keeps B06,
+  a transit beat that has to justify itself later.
+panels:
+  - panel_id: P01
+    beat_ref: B01
+    content: "Mina approaches the door of lab B3."
+    weight: information
+  - panel_id: P02
+    beat_ref: B02
+    content: "The door is already unlocked."
+    weight: reveal
+    carries_reveal: "Someone has been here."
+  - panel_id: P03
+    beat_ref: B03
+    content: "She enters the dark lab."
+    weight: transition
+  - panel_id: P04
+    beat_ref: B04
+    content: "A blue pulse appears, with a low hum."
+    weight: reveal
+    carries_reveal: "The room is not dead."
+  - panel_id: P05
+    beat_ref: B05
+    content: "Jun's access card lies on the floor, name visible."
+    weight: reveal
+    carries_reveal: "Jun was here."
+    dialogue_source: "준? 왜 준의 카드가 여기 있지?"
+    note: >
+      Marked for a later split into P05a (the card, silent) and P05b (her recognition). The split
+      is what preserves the reader-ahead-of-character offset; the direction stages decide how.
+  - panel_id: P06
+    beat_ref: B06
+    content: "Mina looks deeper into the room."
+    weight: transition
+    note: "Weakest panel in this cut. Kept because compression before the climax is worth a frame."
+  - panel_id: P07
+    beat_ref: B07
+    content: "The prototype is active."
+    weight: reveal
+    carries_reveal: "The destruction was never real."
+    dialogue_source: "작동 중이야. 계속 작동하고 있었어."

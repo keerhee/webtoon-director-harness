@@ -29,10 +29,15 @@ validation** into different agents that communicate only through files.
 ## Workflow
 
 ```text
-Upstream Storyboard / Stage 1
+Upstream story, script, or storyboard / Stage 1
         │
         ▼
-  Intake & Normalize ──▶ Narrative Analysis
+  Intake & Normalize
+        │
+        ├── no panels? ──▶ Stage 0.5  Panel Breakdown      ← conditional
+        │                  beat sheet ▸ 3 cuts ▸ review ▸ select ▸ freeze IDs
+        ▼
+  Narrative Analysis
                               │
               ┌───────────────┼───────────────┐
          Emotional        Cinematic      Webtoon-native      ← independent fan-out
@@ -57,6 +62,7 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/WORKFLOW.md](docs
 | Agent | Owns |
 |---|---|
 | **Showrunner** | Final creative authority, conflict resolution, synthesis |
+| **Breakdown Director** | Panel count and where the cuts fall — Stage 0.5, prose input only |
 | **Narrative Director** | Scene objective, dramatic beats, reveal order, hook |
 | **Cinematography Director** | Shot, angle, composition, depth, lighting, visual reveal |
 | **Emotion Director** | Emotional beats, reactions, silence, anticipation |
@@ -92,6 +98,20 @@ To see the target quality first, seed an episode from the worked example:
 python scripts/init_episode.py demo --from-example
 ```
 
+## Input: story, or storyboard?
+
+Both work. The harness detects which one it received.
+
+| You have | What happens |
+|---|---|
+| A **cut storyboard** (panel-level descriptions) | Stage 0.5 is skipped — the cut was made upstream and is not re-litigated |
+| **Prose**: a scene, synopsis, or script | Stage 0.5 runs: a beat sheet, then three candidate cuts (`dense` / `economical` / `spacious`), independently reviewed against a four-axis gate, selected and grafted, then committed as `panels[]` |
+
+You never have to ask for it. The check happens at intake, and the pipeline says which branch it took.
+
+Panel art, layouts, and thumbnails are **not** required at any level — `layout_files` is optional,
+and the worked example completes with it empty.
+
 ## Worked example
 
 [`examples/sample_episode/`](examples/sample_episode) is a complete run over a seven-panel scene:
@@ -106,6 +126,7 @@ handoff package. Start with
 ```text
 _workspace/<episode>/
   00_input/       normalized_input.yaml, source_handoff.md, layouts/
+                  beat_sheet.yaml, breakdown/   (Stage 0.5 only)
   01_analysis/    narrative_analysis.yaml
   02_candidates/  emotional.yaml · cinematic.yaml · webtoon_native.yaml
   03_reviews/     critic_<candidate>.yaml · quality_gate_result.yaml
@@ -135,6 +156,7 @@ forces a revision regardless of the total. See [docs/SCORING.md](docs/SCORING.md
 
 ```bash
 python scripts/score_direction.py _workspace/ep01/03_reviews/critic_*.yaml
+python scripts/score_direction.py _workspace/ep01/00_input/breakdown/critic_*.yaml --gate breakdown
 python scripts/validate_artifacts.py _workspace/ep01     # schema + vocabulary + panel IDs
 python scripts/validate_handoff.py _workspace/ep01/06_handoff
 pytest
@@ -150,7 +172,7 @@ Reference: [docs/DIRECTION_LANGUAGE.md](docs/DIRECTION_LANGUAGE.md)
 ## Repository layout
 
 ```text
-.claude/          8 agents + 4 skills + project instructions (the creative core)
+.claude/          9 agents + 5 skills + project instructions (the creative core)
 harness/          scoring, config loading, artifact validation (the deterministic core)
 config/           quality gate, direction modes, controlled vocabulary
 schemas/          JSON Schema for every structured artifact

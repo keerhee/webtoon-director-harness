@@ -56,6 +56,14 @@ beat_duration:
   hold:      {whitespace_multiplier: 1.5,  use: "The reader is made to wait — reactions, dread."}
   long_hold: {whitespace_multiplier: 2.5,  use: "Climax, aftermath, or the silence before a reveal."}
 
+# Stage 0.5 only: what a panel is FOR, decided before any staging exists.
+panel_weight:
+  information: "Delivers a fact the reader needs. Necessary, and the cheapest kind of panel."
+  reaction:    "Shows the effect of a fact on someone. Where feeling actually lives."
+  transition:  "Moves between places, times, or subjects. Spend few of these."
+  reveal:      "Delivers one - exactly one - new thing. Two reveals in a panel means neither lands."
+  atmosphere:  "Carries mood or place with no plot movement. Powerful in threes, deadly in fives."
+
 dramatic_function:
   - setup
   - escalate
