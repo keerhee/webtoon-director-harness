@@ -97,6 +97,7 @@
 [F] LICENSE
 [F] NOTICE.md
 [F] pyproject.toml
+[F] README.ko.md
 [F] README.md
 [F] REPO_TREE.txt
 [D] _workspace          (gitignored; episode work lives here)

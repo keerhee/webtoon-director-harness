@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "docs/AGENTS.md",
     "docs/DIRECTION_LANGUAGE.md",
     "README.md",
+    "README.ko.md",
     "LICENSE",
     "NOTICE.md",
 ]
@@ -62,3 +63,11 @@ def test_workspace_is_gitignored_but_kept(repo_root):
     assert "_workspace/*" in gitignore
     assert "!_workspace/.gitkeep" in gitignore
     assert (repo_root / "_workspace" / ".gitkeep").exists()
+
+
+def test_readmes_cross_link(repo_root):
+    """A translation nobody can find from the front page is a translation nobody reads."""
+    english = (repo_root / "README.md").read_text(encoding="utf-8")
+    korean = (repo_root / "README.ko.md").read_text(encoding="utf-8")
+    assert "README.ko.md" in english
+    assert "README.md" in korean

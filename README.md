@@ -1,5 +1,7 @@
 # Webtoon Director Harness
 
+**English** · [한국어](README.ko.md)
+
 [![CI](https://github.com/keerhee/webtoon-director-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/keerhee/webtoon-director-harness/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
